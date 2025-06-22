@@ -23,9 +23,9 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
 ## Table of Contents
 1. [Prerequisites](#prerequisites)
 2. [Initializing Your Repository - Create & Fork](#initializing-your-repository---create-&-Fork)
-    1. [Step 1: Create a New Repository](#Step-1:-Create-a-New-Repository)
-    2. [Step 2: Fork the Jaffle Shop Project](#Step-2:-Fork-the-Jaffle-Shop-Project)
-3. [Clean up the repository](#Clean-up-the-repository)
+    1. [Step 1: Create a New Repository](#step-1:-create-a-new-repository)
+    2. [Step 2: Fork the Jaffle Shop Project](#step-2:-fork-the-jaffle-shop-project)
+3. [Clean up the repository](#clean-up-the-repository)
 
 ## Prerequisites
 - A dbt Cloud account (a 14-day free trial is available)
@@ -36,11 +36,13 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
 > In this project, Snowflake is used as the data warehouse, but you can adapt it to other supported platforms if needed.
 
 ## Initializing Your Repository - Create & Fork
+
 ### Step 1: Create a New Repository
 1. Go to your GitHub account.
 2. In the top-right corner, click "Create new..." and select "New repository".
 3. Name your repository dbt-task-jaffle-shop (or another name of your choice).
    In this guide, we'll use dbt-task-jaffle-shop as the example repository name.
+   
 ### Step 2: Fork the Jaffle Shop Project
 1. Visit the official [dbt-labs/jaffle-shop ](https://github.com/dbt-labs/jaffle-shop) GitHub repository.
 2. Make sure you're on the main branch.
@@ -51,6 +53,7 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
 Only the following items from this repository are required:
 - The files located in the seeds/jaffle-data folder
 - The dbt_project.yml file
+
 Please feel free to delete the remaining files, as they are not needed for this project.
 
 > [!IMPORTANT]
