@@ -6,7 +6,7 @@ The purpose of this README is to guide you through:
 - Setting up the project in dbt Cloud
 - Loading the example datasets
 - Performing data transformations
-- Building analytical models that can help uncover valuable insights into customer behavior and business performance
+- Building models that can help uncover valuable insights into customer behavior and business performance
 
 By the end of this project, you'll have hands-on experience with building a modern analytics workflow using dbt Cloud.
 
@@ -20,4 +20,11 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
 > [!NOTE]
 > In the context of this project, the main focus will be on the processes of the    (The raw datasets used in the context of this project are included in the folder [seeds/jaffle-data](https://github.com/KosmasDev/dbt-task-jaffle-shop/tree/main/seeds/jaffle-data).)
 
-edsdsad
+## Table of Contents
+1. [Section 1](#section-1)
+2. [Section 1.1](#section-11)
+3. [Section 3](#section-2)
+
+## Setion 1
+# Section 11
+## Section 2
