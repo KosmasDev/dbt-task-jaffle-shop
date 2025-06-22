@@ -1,39 +1,33 @@
 WITH 
 
-distinct_product_id AS (
+total_distinct_products AS (
   SELECT
-    DISTINCT product_id
+    COUNT(DISTINCT(product_id))
   FROM
     {{ ref('stg_order_items') }}
 ),
 
 customer_orders AS (
   SELECT
-    o.customer_id,
-    COUNT(DISTINCT oi.product_id) AS product_id_count
+    ord.customer_id,
+    COUNT(DISTINCT oi.product_id) AS count_product_id
   FROM
-         {{ ref('stg_orders') }} AS o
-    JOIN {{ ref('stg_order_items') }} AS oi ON o.order_id = oi.order_id
+         {{ ref('stg_order_items') }} AS oi 
+    JOIN {{ ref('stg_orders') }} AS ord ON ord.order_id = oi.order_id
+    JOIN {{ ref('stg_customers') }} AS cust ON ord.customer_id = cust.customer_id
   GROUP BY
-    o.customer_id
-),
-
-total_product_id AS (
-  SELECT
-    COUNT(*) AS product_id
-  FROM
-    distinct_product_id
+    ord.customer_id
 ),
 
 customers_order_everything AS (
 SELECT
-  c.customer_id,
-  c.customer_name,
-  co.product_id_count
+  cust.customer_id,
+  cust.customer_name,
+  co.count_product_id
 FROM
   customer_orders AS co
-  JOIN {{ ref('stg_customers') }} AS c ON co.customer_id = c.customer_id
-WHERE co.product_id_count = (SELECT * FROM total_product_id)
+  JOIN {{ ref('stg_customers') }} AS cust ON co.customer_id = cust.customer_id
+WHERE co.count_product_id = (SELECT * FROM total_distinct_products)
 )
 
 SELECT 

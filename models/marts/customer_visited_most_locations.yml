@@ -1,0 +1,17 @@
+models:
+  - name: customer_visited_most_locations
+    description: List of customers that have visited the most locations.
+    columns:
+      - name: customer_id
+        description: The unique key for each customer.
+        tests:
+          - not_null
+          - unique
+      - name: customer_name
+        description: The full name of each customer.
+        tests:
+          - not_null
+      - name: count_of_locations_visited
+        description: The number of distinct locations that the customer has visited.
+        tests:
+          - not_null

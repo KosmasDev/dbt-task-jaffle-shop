@@ -1,0 +1,21 @@
+models:
+  - name: most_loyal_customer_per_location
+    description: List of top customers per store location based on the number of visits..
+    columns:
+      - name: customer_id
+        description: The unique key for each customer.
+        tests:
+          - not_null
+          - unique
+      - name: customer_name
+        description: The full name of each customer.
+        tests:
+          - not_null
+      - name: location_name
+        description: The name of the store location.
+        tests:
+          - not_null
+      - name: store_visits
+        description: The number of times that the customer has visited the store.
+        tests:
+          - not_null
