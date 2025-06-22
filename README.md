@@ -1,4 +1,5 @@
-# Customer Analytics with dbt Cloud – by Kosmas Strakosia
+# ![dbt logo](https://raw.githubusercontent.com/dbt-labs/dbt/main/docs/_static/dbt-logo-full.png)
+ Customer Analytics with dbt Cloud – by Kosmas Strakosia
 
 This project is designed to help you explore the core functionality and key features of the dbt Cloud platform. It uses a fictional restaurant — the Jaffle Shop — as the basis for working with realistic, relatable data.
 
@@ -27,7 +28,6 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
 2. [Section 3](#section-2)
 
 ## Prerequisites
-Before getting started, make sure you have the following:
 - A dbt Cloud account (a 14-day free trial is available)
 - Access to a data warehouse with the necessary permissions to:
     - Create a new database for this project
