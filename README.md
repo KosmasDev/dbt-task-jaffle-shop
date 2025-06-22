@@ -5,6 +5,6 @@ This is a project for exploring the basic functionality and features of the dbt 
 ## Purpose & Insights
 
 The main purpose of this project is to explore the dbt Cloud features and utilize its functionalities to load, transform, and analyse the required data in order to answer the below questions.
-### 1. Which customer has visited more locations?
-### 2. List the most loyal customer per location.
-### 3. Has anyone ordered everything?
+- Which customer has visited more locations?
+- List the most loyal customer per location.
+- Has anyone ordered everything?
