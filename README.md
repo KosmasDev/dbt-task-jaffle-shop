@@ -33,11 +33,12 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
 
 ## Prerequisites
 Before getting started, make sure you have the following:
-✅ A dbt Cloud account (a 14-day free trial is available)
-✅ Access to a data warehouse with the necessary permissions to:
+- A dbt Cloud account (a 14-day free trial is available)
+- Access to a data warehouse with the necessary permissions to:
     - Create a new database for this project
     - Execute SQL queries and run dbt models
-💡 In this project, Snowflake is used as the data warehouse, but you can adapt it to other supported platforms if needed.
+> [!NOTE]
+> In this project, Snowflake is used as the data warehouse, but you can adapt it to other supported platforms if needed.
 
 
 
