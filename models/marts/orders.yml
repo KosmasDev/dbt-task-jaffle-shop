@@ -15,7 +15,7 @@ models:
         description: The full name of each customer.
         tests:
           - not_null
-      - name: store_id
+      - name: location_id
         description: The identifier for each store.
         tests:
           - not_null
@@ -23,5 +23,3 @@ models:
         description: The location name for each store.
         tests:
           - not_null
-    tests:
-      - name: test_order_date_after_store_opening

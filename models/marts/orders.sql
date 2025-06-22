@@ -8,22 +8,22 @@ stg_customers AS (
     SELECT * FROM {{ ref('stg_customers') }}
 ),
 
-stg_stores AS (
-    SELECT * FROM {{ ref('stg_stores') }}
+stg_locations AS (
+    SELECT * FROM {{ ref('stg_locations') }}
 ),
 
 joined_tables AS (
     SELECT 
         stg_orders.order_id,
-        stg_orders.ordered_at,
+        stg_orders.order_date,
         stg_orders.customer_id,
         stg_customers.customer_name,
-        stg_orders.store_id,
-        stg_stores.location_name,
-        stg_stores.opening_date
+        stg_orders.location_id,
+        stg_locations.location_name,
+        stg_locations.opening_date
     FROM stg_orders
     LEFT JOIN stg_customers ON stg_orders.customer_id = stg_customers.customer_id
-    LEFT JOIN stg_stores ON stg_orders.store_id = stg_stores.store_id
+    LEFT JOIN stg_locations ON stg_orders.location_id = stg_locations.location_id
 )
 
 SELECT * FROM joined_tables

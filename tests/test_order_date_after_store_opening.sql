@@ -1,3 +1,3 @@
 SELECT *
 FROM {{ ref('orders') }}
-WHERE ordered_at <= opening_date
+WHERE order_date <= opening_date
