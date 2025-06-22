@@ -22,9 +22,9 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
 
 ## Table of Contents
 1. [Prerequisites](#prerequisites)
-2. [Initializing Your Repository - Create & Fork](#initializing-your-repository---create-&-Fork)
-    1. [Step 1: Create a New Repository](#step-1:-create-a-new-repository)
-    2. [Step 2: Fork the Jaffle Shop Project](#step-2:-fork-the-jaffle-shop-project)
+2. [Initializing your repository – create and fork](#initializing-your-repository--create-and-fork)
+    1. [Step 1: Create a new repository](#step-1-create-a-new-repository)
+    2. [Step 2: Fork the jaffle shop project](#step-2-fork-the-jaffle-shop-project)
 3. [Clean up the repository](#clean-up-the-repository)
 
 ## Prerequisites
