@@ -22,9 +22,10 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
 
 ## Table of Contents
 1. [Prerequisites](#prerequisites)
-    1. [Section 1.1](#section-11)
-    2. [Section 1.2](#section-12)
-2. [Section 3](#section-2)
+2. [Initializing Your Repository - Create & Fork](#initializing-your-repository---create-&-Fork)
+    1. [Step 1: Create a New Repository](#Step-1:-Create-a-New-Repository)
+    2. [Step 2: Fork the Jaffle Shop Project](#Step-2:-Fork-the-Jaffle-Shop-Project)
+3. [Clean up the repository](#Clean-up-the-repository)
 
 ## Prerequisites
 - A dbt Cloud account (a 14-day free trial is available)
@@ -34,11 +35,19 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
 > [!NOTE]
 > In this project, Snowflake is used as the data warehouse, but you can adapt it to other supported platforms if needed.
 
-## Create new repo & fork
-1. Create a new repository with the name "dbt-task-jaffle-shop"
-   1. At the top right corner of the page click "Create new.." > "New repository"
-   2. Add the repo name. In the context of the project, the repo was named "dbt-task-jaffle-shop".
-2. Use the following link to access the [dbt-labs/jaffle-shop ](https://github.com/dbt-labs/jaffle-shop) and fork the main branch into your new repo.
+## Initializing Your Repository - Create & Fork
+
+### Step 1: Create a New Repository
+1. Go to your GitHub account.
+2. In the top-right corner, click "Create new..." and select "New repository".
+3. Name your repository dbt-task-jaffle-shop (or another name of your choice).
+   In this guide, we'll use dbt-task-jaffle-shop as the example repository name.
+
+### Step 2: Fork the Jaffle Shop Project
+1. Visit the official [dbt-labs/jaffle-shop ](https://github.com/dbt-labs/jaffle-shop) GitHub repository.
+2. Make sure you're on the main branch.
+3. Click the "Fork" button (top-right corner of the page).
+4. Select your newly created repo (dbt-task-jaffle-shop) as the destination.
 
 ## Clean up the repository
 Only the following items from this repository are required:
