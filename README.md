@@ -1,5 +1,4 @@
-# <img src="https://raw.githubusercontent.com/dbt-labs/dbt/main/docs/_static/dbt-mark.png" alt="dbt icon" width="30"/>
- Customer Analytics with dbt Cloud – by Kosmas Strakosia
+# Customer Analytics with dbt Cloud – by Kosmas Strakosia
 
 This project is designed to help you explore the core functionality and key features of the dbt Cloud platform. It uses a fictional restaurant — the Jaffle Shop — as the basis for working with realistic, relatable data.
 
@@ -35,6 +34,11 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
 > [!NOTE]
 > In this project, Snowflake is used as the data warehouse, but you can adapt it to other supported platforms if needed.
 
-
+## Create new repo & fork
+1. Create a new repository with the name "dbt-task-jaffle-shop"
+   1. At the top right corner of the page click "Create new.." > "New repository"
+   2. Add the repo name. In the context of the project, the repo was named "dbt-task-jaffle-shop".
+2. Use the following link to access the https://github.com/dbt-labs/jaffle-shop and fork the main branch into your new repo.
+3. 
 
 
