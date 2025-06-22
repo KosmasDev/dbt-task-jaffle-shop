@@ -38,7 +38,8 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
 1. Create a new repository with the name "dbt-task-jaffle-shop"
    1. At the top right corner of the page click "Create new.." > "New repository"
    2. Add the repo name. In the context of the project, the repo was named "dbt-task-jaffle-shop".
-2. Use the following link to access the https://github.com/dbt-labs/jaffle-shop and fork the main branch into your new repo.
-3. 
+2. Use the following link to access the [dbt-labs/jaffle-shop ](https://github.com/dbt-labs/jaffle-shop) dbt-labs/jaffle-shop repo and fork the main branch into your new repo.
+   [dbt-labs/jaffle-shop ](https://github.com/dbt-labs/jaffle-shop)
+4. 
 
 
