@@ -22,8 +22,8 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
 
 ## Table of Contents
 1. [Section 1](#section-1)
-          [Section 1.1](#section-11)
-3. [Section 3](#section-2)
+2.           [Section 1.1](#section-11)
+4. [Section 3](#section-2)
 
 ## Setion 1
 # Section 11
