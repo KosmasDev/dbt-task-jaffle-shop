@@ -1,4 +1,4 @@
-# ![dbt logo](https://raw.githubusercontent.com/dbt-labs/dbt/main/docs/_static/dbt-logo-full.png)
+# <img src="https://raw.githubusercontent.com/dbt-labs/dbt/main/docs/_static/dbt-mark.png" alt="dbt icon" width="30"/>
  Customer Analytics with dbt Cloud – by Kosmas Strakosia
 
 This project is designed to help you explore the core functionality and key features of the dbt Cloud platform. It uses a fictional restaurant — the Jaffle Shop — as the basis for working with realistic, relatable data.
