@@ -1,0 +1,27 @@
+models:
+  - name: orders
+    description: Order data with detailed information for the customers and store locations.
+    columns:
+      - name: order_id
+        description: The unique key for each order.
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: The identifier for each customer.
+        tests:
+          - not_null
+      - name: customer_name
+        description: The full name of each customer.
+        tests:
+          - not_null
+      - name: store_id
+        description: The identifier for each store.
+        tests:
+          - not_null
+      - name: location_name
+        description: The location name for each store.
+        tests:
+          - not_null
+    tests:
+      - name: test_order_date_after_store_opening
