@@ -35,7 +35,7 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
 > [!NOTE]
 > In this project, Snowflake is used as the data warehouse, but you can adapt it to other supported platforms if needed.
 
-## Initializing Your Repository - Create & Fork
+## Initializing Your Repository - Create and Fork
 
 ### Step 1: Create a New Repository
 1. Go to your GitHub account.
