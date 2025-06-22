@@ -36,13 +36,11 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
 > In this project, Snowflake is used as the data warehouse, but you can adapt it to other supported platforms if needed.
 
 ## Initializing Your Repository - Create & Fork
-
 ### Step 1: Create a New Repository
 1. Go to your GitHub account.
 2. In the top-right corner, click "Create new..." and select "New repository".
 3. Name your repository dbt-task-jaffle-shop (or another name of your choice).
    In this guide, we'll use dbt-task-jaffle-shop as the example repository name.
-
 ### Step 2: Fork the Jaffle Shop Project
 1. Visit the official [dbt-labs/jaffle-shop ](https://github.com/dbt-labs/jaffle-shop) GitHub repository.
 2. Make sure you're on the main branch.
