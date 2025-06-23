@@ -24,7 +24,7 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
 
 ## 📘 Table of Contents
 1. [Prerequisites](#prerequisites)
-2. [Initializing your repository – create and fork](#initializing-your-repository--create-and-fork)
+2. [Initializing your repository – Create and Fork](#initializing-your-repository--create-and-fork)
     1. [Step 1: Create a new repository](#step-1-create-a-new-repository)
     2. [Step 2: Fork the jaffle shop project](#step-2-fork-the-jaffle-shop-project)
 3. [Clean up the repository](#clean-up-the-repository)
@@ -42,7 +42,7 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
 > [!NOTE]
 > In this project, Snowflake is used as the data warehouse, but you can adapt it to other supported platforms if needed.
 
-## 🆕 Initializing your repository – Create and fork
+## 🆕 Initializing your repository – Create and Fork
 
 ### Step 1: Create a new repository
 1. Go to your GitHub account.
@@ -121,7 +121,11 @@ Set up a dbt Cloud account if you don't have one already (if you do, just create
 This section provides a step-by-step guide to loading the datasets, transforming the raw data, and building models to extract meaningful insights.
 
 ### 📥 Load the Data
+There are multiple ways to load the data for this project. Below, you’ll find the approach used in this setup, along with an alternative method you can consider.
+- **Approach 1: Utilize the sample data in the repo**
 
+> [!IMPORTANT]
+> Seeds in dbt are static CSV files typically used to upload small reference datasets that support modeling workflows. In this project, seeds are leveraged as a convenient way to ingest sample data quickly. While this is not the primary purpose of seeds - ***since dbt is not designed as a data ingestion or loading tool*** - using seeds in this way allows us to focus on building and testing models without needing to set up a full external data pipeline.
 
 
 
