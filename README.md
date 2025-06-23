@@ -131,12 +131,11 @@ There are multiple ways to load the data for this project. Below, you’ll find 
 
 ```yml
 seeds:
-  dbt_task_analytics:  # Project-level config for seed files in the 'dbt_task_analytics' project
-    +schema: raw        # All seed tables will be loaded into the 'raw' schema in the target database
-    jaffle-data:        # Specific configuration for the 'jaffle-data.csv' seed file
-      +enabled: "{{ var('load_source_data', false) }}"  
-        # Conditionally enables the 'jaffle-data' seed based on the 'load_source_data' variable
-        # If 'load_source_data' is set to true, this seed will be loaded
+  dbt_task_analytics:   # specify the project name
+    +schema: raw        # Target schema
+    jaffle-data:        # refers to the 'jaffle-data' folder
+      +enabled: "{{ var('load_source_data', false) }}"  # Conditionally enables the 'jaffle-data' seed based on the 'load_source_data' variable
+                                                        # If 'load_source_data' is set to true, this seed will be loaded
 ```
       
 - Next, we need to run the following dbt command to generate the seed tables. Once executed successfully, the resulting tables will appear in Snowflake as shown in the screenshot below. 
