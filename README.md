@@ -14,7 +14,7 @@ By the end of this project, you'll have hands-on experience with building a mode
 
 ## 🔍 Customer Behavior Analysis
 
-The objective of this project is to leverage dbt Cloud's capabilities to ingest, transform, and analyze customer and order data in order to answer key business questions related to customer engagement and loyalty. Specifically, the analysis focuses on the following insights:
+The objective of this project is to leverage dbt Cloud's capabilities to ingest, transform, and analyze customer and order data to answer key business questions related to customer engagement and loyalty. Specifically, the analysis focuses on the following insights:
 - Which customer has visited more locations?
 - List the most loyal customer per location.
 - Has anyone ordered everything?
@@ -244,7 +244,12 @@ The YAML files are model metadata files in the `models/staging` folder, and they
     - The SQL contains the logic
     - The YAML contains the metadata and validations
 
-Below you can find the content of the `stg_orders.yml`. You can find all the staging .yml files [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/tree/dev/models/staging).
+Below you can find the content of the `stg_orders.yml`. The quality tests are one of the most important parts of the file as we have defined that:
+    - `order_id` must be not null and unique
+    - `customer_id`, `location_id`, and `order_date` must all be not null
+    - The following row-level expression must hold TRUE: `total_price - tax = pretax_price`
+    
+You can find all the staging .yml files [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/tree/dev/models/staging).
 
 ```bash
 models:
@@ -272,6 +277,7 @@ models:
         data_tests:
           - not_null
 ```
+
 
 
 
