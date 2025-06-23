@@ -63,8 +63,9 @@ Please feel free to delete the remaining files, as they are not needed for this 
 1. Create a logical database in your data warehouse for this project. The database name used in this project is `dbt_analytics`. We recommend using the same name for consistency with the project.
 2. Set up a dbt Cloud account if you don't have one already (if you do, just create a new project) and follow Step 4 in the https://docs.getdbt.com/guides/snowflake?step=4, to connect Snowflake to dbt Cloud. Make sure the user you configure for your connections has adequate database permissions to run dbt in the `dbt_analytics` database.
 
-[Connect dbt to Snowflake](https://docs.getdbt.com/guides/snowflake?step=4)
+[Connect dbt to Snowflake](https://docs.getdbt.com/guides/snowflake/)
 https://docs.getdbt.com/guides/snowflake?step=4
+https://docs.getdbt.com/guides/snowflake?step=4 
 
 
 
