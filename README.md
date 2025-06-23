@@ -223,7 +223,7 @@ This file allows dbt to:
 
 Below you can see the content of the file
 
-```text
+```yml
 version: 2
 
 sources:
