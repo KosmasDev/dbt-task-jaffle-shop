@@ -237,6 +237,9 @@ SELECT * FROM renamed
 
 - 📄 Staging YAML files
 
+The YAML files are a model metadata files in the `models/staging` folder, and they are used in dbt to:
+1. Document the models and columns by providing a human-readable description of what the model `stg_orders` represents and what each column means. Based on this YAML file the we can generate auto-docs in dbt Cloud using this metadata.
+2. Define data quality tests 
 
 
 
