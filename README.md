@@ -27,6 +27,10 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
     2. [Step 2: Fork the jaffle shop project](#step-2-fork-the-jaffle-shop-project)
 3. [Clean up the repository](#clean-up-the-repository)
 4. [dbt Platform setup](#dbt-platform-setup)
+    1. [Configure Snowflake for dbt Cloud](#configure-snowflake-for-dbt-cloud)
+    2. [Set up a dbt Cloud Account](#set-up-a-dbt-cloud-account)
+    3. [Create a New dbt Project](#create-a-new-dbt-project)
+
 
 ## Prerequisites
 - A dbt Cloud account (a 14-day free trial is available)
@@ -86,12 +90,12 @@ GRANT create schema ON DATABASE dbt_analytics TO ROLE analyser;
 ```
 
 > [!NOTE]
-> In the context of this project, a single database `dbt_analytics` is used for both the source and the model-generated tables. In case the source tables were stored in a different database than the one used for the transformations, then we would need to grant privileges to the `analyser` role to get access to this database.
+> In this project, both the source tables and the model-generated tables are stored in the same database: dbt_analytics. If the source tables were located in a different database, additional privileges would need to be granted to the `analyser` role to ensure it has access to that database.
 
 ### Set up a dbt Cloud Account
 Set up a dbt Cloud account if you don't have one already (if you do, just create a new project) and follow Step 4 in the [dbt-snowflake connection guide ](https://docs.getdbt.com/guides/snowflake/), to connect Snowflake to dbt Cloud. Make sure the user you configure for your connections has [adequate database permissions ](https://docs.getdbt.com/reference/database-permissions/about-database-permissions) to run dbt in the `dbt_analytics` database.
 
-### Create a New dbt Project.
+### Create a New dbt Project
 1. Name your project — Choose a meaningful name to identify your dbt project.
 2. Configure your data warehouse — Select Snowflake as the warehouse and provide the required connection details:
    - Account
