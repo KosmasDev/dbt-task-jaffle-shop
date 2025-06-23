@@ -211,6 +211,42 @@ The `models` folder of the repo, holds all the SQL models we build, which define
 #### 🏗️ Create Staging Layer Models
 Staging models sit right on top of the raw data *(including source tables)*. They perform basic cleaning and normalization of source data. Raw source data is usually inconsistent or has unclear naming conventions. Staging creates a clean and reliable layer that downstream models can depend on without having to handle source inconsistencies each time.
 
+- 📝 Create the __sources.yml file
+
+The `__sources.yml` file in the `models/staging` folder plays a very important role in how dbt connects to and tracks the raw data in the warehouse. It is a source declaration file that is used to "show" to dbt that the data already exist in the warehouse, in order for it to refer to this data as a trusted input in the models. 
+
+This file allows dbt to:
+1. Reference existing raw tables with the source() function
+2. Track lineage from raw → staging → marts
+3. Add documentation to raw tables
+4. Enable testing and freshness checks
+
+Below you can see the content of the file
+
+```bash
+version: 2
+
+sources:
+  - name: ecom
+    schema: dbt_kstrakosia_raw
+    description: E-commerce data for the Jaffle Shop
+    tables:
+      - name: raw_customers
+        description: One record per person who has purchased one or more items
+      - name: raw_orders
+        description: One record per order (consisting of one or more order items)
+        loaded_at_field: ordered_at
+      - name: raw_items
+        description: Items included in an order
+      - name: raw_stores
+        loaded_at_field: opened_at
+      - name: raw_products
+        description: One record per SKU for items sold in stores
+      - name: raw_supplies
+        description: One record per supply per SKU of items sold in stores
+```
+
+
 - 📝 Create staging SQL files
 
 In this project, our primary focus within the staging models is to standardize and clarify column names—especially when original names lack clear context or meaning. Below is an example (`stg_orders.sql`) located in the `models/staging` folder, where we apply these naming improvements as part of the staging process. All the staging models pull data from the source tables saved in the `raw` schema. You can find all the staging .sql files [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/tree/dev/models/staging).
@@ -245,10 +281,9 @@ The YAML files are model metadata files in the `models/staging` folder, and they
     - The YAML contains the metadata and validations
 
 Below you can find the content of the `stg_orders.yml`. The quality tests are one of the most important parts of the file as we have defined that:
-
-  - `order_id` must be not null and unique
-  - `customer_id`, `location_id`, and `order_date` must all be not null
-  - The following row-level expression must hold TRUE: `total_price - tax = pretax_price`
+1. `order_id` must be not null and unique
+2. `customer_id`, `location_id`, and `order_date` must all be not null
+3. The following row-level expression must hold TRUE: `total_price - tax = pretax_price`
     
 You can find all the staging .yml files [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/tree/dev/models/staging).
 
