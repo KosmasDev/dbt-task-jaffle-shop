@@ -190,7 +190,7 @@ file_format = (
     );
 ```
 
-The same process should be repeated for all six tables included in this project. Please, find below the URIs of the tables you will need to copy into your database.
+The same process must be applied to all six tables involved in this project. Below are the URIs for each table that you will need to load into your raw schema.
 
 | table name        | S3 URI                                                           | Direct Download Link                                                                                     | Schema                                                                                                    |
 |-------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
@@ -203,7 +203,12 @@ The same process should be repeated for all six tables included in this project.
 
 ✅ With the setup complete, we’re ready to proceed to the next step.
 
+### 🛠️ Develop Models
+The `models` folder of the repo, holds all the SQL models we build, which define transformations and shape data in our warehouse. Usually, these models are split into different layers or folders to enforce modularity, clarity, and maintainability. In the screenshot below, you can see the data flow that visualises the connections of the models created. 
 
+![Screenshot 2025-06-23 221125](https://github.com/user-attachments/assets/bf4b39ce-bc13-4ad0-9887-cd524b34976e)
+
+#### 🏗️ Create Staging Layer Models
 
 
 
