@@ -120,13 +120,13 @@ Set up a dbt Cloud account if you don't have one already (if you do, just create
 ## 🚀 Project Execution Guide
 This section provides a step-by-step guide to loading the datasets, transforming the raw data, and building models to extract meaningful insights.
 
-### 📥 Load the Data
+## 📥 Load the Data
 There are multiple ways to load the data for this project. Below, you’ll find the approach used in this setup, along with an alternative method you can consider.
 
 > [!IMPORTANT]
 > Seeds in dbt are static CSV files typically used to upload small reference datasets that support modeling workflows. In this project, seeds are leveraged as a convenient way to ingest sample data quickly. While this is not the primary purpose of seeds - ***since dbt is not designed as a data ingestion or loading tool*** - using seeds in this way allows us to focus on building and testing models without needing to set up a full external data pipeline. In the context of this project, we followed Approach 1.
 
-#### 🗂️ Approach 1: Utilize the sample data in the repo
+### 🗂️ Approach 1: Utilize the sample data in the repo
 - To populate the source files located in `seeds/jaffle-data` as tables in Snowflake, we first need to configure the `dbt_project.yml` file, as shown in the screenshot below. In this file, we define the project name (`dbt_task_analytics`) and specify the target schema where the seed tables will be created — in this case, `raw`. Note that the database does not need to be defined in this file, as it is configured separately within the dbt Cloud connection settings. Please find the `dbt_project.yml` file [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/blob/dev/dbt_project.yml).
 
 ```yml
@@ -157,7 +157,7 @@ SELECT * FROM dbt_analytics.dbt_kstrakosia_raw.raw_stores;
 SELECT * FROM dbt_analytics.dbt_kstrakosia_raw.raw_supplies;
 ```
 
-#### 💾 Approach 2: Load the data from S3
+### 💾 Approach 2: Load the data from S3
 - Set Up the Target Schema *(Define the schema that will house the source tables)*
 ```sql
 CREATE SCHEMA dbt_analytics.dbt_kstrakosia_raw;
@@ -210,15 +210,15 @@ The same process must be applied to all six tables involved in this project. Bel
 
 ✅ With the setup complete, we’re ready to proceed to the next step.
 
-### 🛠️ Develop Models
+## 🛠️ Develop Models
 The `models` folder of the repo, holds all the SQL models we build, which define transformations and shape data in our warehouse. Usually, these models are split into different layers or folders to enforce modularity, clarity, and maintainability. In the screenshot below, you can see the data flow that visualises the connections of the models that will be created. 
 
 ![Screenshot 2025-06-23 221912](https://github.com/user-attachments/assets/e093b1e5-d1ef-4202-b353-1338f4ace26b)
 
-#### 🏗️ Create Staging Layer Models
+### 🏗️ Create Staging Layer Models
 Staging models sit right on top of the raw data *(including source tables)*. They perform basic cleaning and normalization of source data. Raw source data is usually inconsistent or has unclear naming conventions. Staging creates a clean and reliable layer that downstream models can depend on without having to handle source inconsistencies each time.
 
-- 🧰 Configure the dbt_project.yml file for Staging
+#### 🧰 Configure the dbt_project.yml file for Staging
 
 We need to apply folder-level configuration for everything under `models/staging`. In this context, we need to define the target schema of the staging tables and the materialization type.
 
@@ -241,7 +241,7 @@ models:
 > So, every time we run `dbt run`, `dbt test`, `dbt build`, etc., dbt consults this file to know what to do with the models.
 
 
-- 🧭 Create the __sources.yml file
+#### 🧭 Create the __sources.yml file
 
 The `__sources.yml` file in the `models/staging` folder plays a very important role in how dbt connects to and tracks the raw data in the warehouse. It is a source declaration file that is used to "show" to dbt that the data already exist in the warehouse, in order for it to refer to this data as a trusted input in the models. 
 
@@ -277,7 +277,7 @@ sources:
 ```
 
 
-- 📝 Create staging SQL files
+#### 📝 Create staging SQL files
 
 In this project, our primary focus within the staging models is to standardize and clarify column names—especially when original names lack clear context or meaning. Below is an example (`stg_orders.sql`) located in the `models/staging` folder, where we apply these naming improvements as part of the staging process. All the staging models pull data from the source tables saved in the `raw` schema. You can find all the staging .sql files [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/tree/dev/models/staging).
 
@@ -301,7 +301,7 @@ renamed AS (
 SELECT * FROM renamed
 ```
 
-- 📄 Create staging YAML files
+#### 📄 Create staging YAML files
 
 The YAML files are model metadata files in the `models/staging` folder, and they are used in dbt to:
 1. Document the models and columns by providing a human-readable description of what the model `stg_orders` represents and what each column means. Based on this YAML file the we can generate auto-docs in dbt Cloud using this metadata.
@@ -344,7 +344,7 @@ models:
           - not_null
 ```
 
-#### 📊 Create Marts Layer Models
+### 📊 Create Marts Layer Models
 
 
 
