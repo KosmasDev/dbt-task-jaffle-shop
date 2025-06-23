@@ -1,4 +1,4 @@
-# Customer Analytics with dbt Cloud – by Kosmas Strakosia
+# 📊 Customer Analytics with dbt Cloud – by Kosmas Strakosia
 
 This project is designed to help you explore the core functionality and key features of the dbt Cloud platform. It uses a fictional restaurant - the Jaffle Shop - as the basis for working with realistic, relatable data.
 
@@ -108,7 +108,7 @@ Set up a dbt Cloud account if you don't have one already (if you do, just create
    - Warehouse
    - Role
 3. Connect your GitHub repository — Select the repository you created earlier to serve as the codebase for this dbt project.
-4. Click on the 'Studio' button on the left bar. This will bring you into the dbt Cloud IDE, the main environment where all the transformations will happen.
+4. Click on the 'Studio' button on the left bar. This will bring you into the dbt Cloud IDE, which is the browser-based editor that will enable you work on dbt models, seeds, macros, and other files. 
 ![image](https://github.com/user-attachments/assets/e4d3918e-edb4-4a78-9910-0803f41ee0dd)
 
 
