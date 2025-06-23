@@ -1,6 +1,6 @@
 # Customer Analytics with dbt Cloud – by Kosmas Strakosia
 
-This project is designed to help you explore the core functionality and key features of the dbt Cloud platform. It uses a fictional restaurant — the Jaffle Shop — as the basis for working with realistic, relatable data.
+This project is designed to help you explore the core functionality and key features of the dbt Cloud platform. It uses a fictional restaurant - the Jaffle Shop - as the basis for working with realistic, relatable data.
 
 The purpose of this README is to guide you through:
 - Setting up the project in dbt Cloud
@@ -61,7 +61,10 @@ Please feel free to delete the remaining files, as they are not needed for this 
 
 ## dbt Platform setup
 1. Create a logical database in your data warehouse for this project. The database name used in this project is `dbt_analytics`. We recommend using the same name for consistency with the project.
-2. Set up a dbt Cloud account if you don't have one already (if you do, just create a new project) and follow Step 4 in the [dbt-snowflake connection guide ](https://docs.getdbt.com/guides/snowflake/), to connect Snowflake to dbt Cloud. Make sure the user you configure for your connections has adequate database permissions to run dbt in the `dbt_analytics` database.
+2. Set up a dbt Cloud account if you don't have one already (if you do, just create a new project) and follow Step 4 in the [dbt-snowflake connection guide ](https://docs.getdbt.com/guides/snowflake/), to connect Snowflake to dbt Cloud. Make sure the user you configure for your connections has [adequate database permissions ](https://docs.getdbt.com/reference/database-permissions/about-database-permissions) to run dbt in the `dbt_analytics` database.
+
+
+
 
 
 
