@@ -26,6 +26,7 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
     1. [Step 1: Create a new repository](#step-1-create-a-new-repository)
     2. [Step 2: Fork the jaffle shop project](#step-2-fork-the-jaffle-shop-project)
 3. [Clean up the repository](#clean-up-the-repository)
+4. [dbt Platform setup](#dbt-platform-setup)
 
 ## Prerequisites
 - A dbt Cloud account (a 14-day free trial is available)
@@ -60,16 +61,44 @@ Please feel free to delete the remaining files, as they are not needed for this 
 > Before removing any files, ensure that each existing folder contains a placeholder file named .gitkeep. This will allow you to clean up unnecessary files while still preserving the folder structure in version control.
 
 ## dbt Platform setup
-1. Create a logical database in your data warehouse for this project. The database name used in this project is `dbt_analytics`. We recommend using the same name for consistency with the project.
+
+### Configure Snowflake for dbt Cloud
+1. Ensure you have the correct role `ACCOUNTADMIN` to create new roles and grant privileges
+2. Create a logical database in your data warehouse for this project. The database name used in this project is `dbt_analytics`
 ```bash
 CREATE DATABASE dbt_analytics
 ```
-2. Set up a dbt Cloud account if you don't have one already (if you do, just create a new project) and follow Step 4 in the [dbt-snowflake connection guide ](https://docs.getdbt.com/guides/snowflake/), to connect Snowflake to dbt Cloud. Make sure the user you configure for your connections has [adequate database permissions ](https://docs.getdbt.com/reference/database-permissions/about-database-permissions) to run dbt in the `dbt_analytics` database.
+3. Create a dedicated warehouse used for the transformation processes called `transforming`
+```bash
+CREATE WAREHOUSE analysing with WAREHOUSE_SIZE = 'SMALL'
+```
+4. Set up a role for you (as a developer) to access the warehouse and the database that you have created
+```bash
+CREATE ROLE analyser
+```
+5. Grant the below privileges to the `analyser` role
+```bash
+GRANT usage ON DATABASE dbt_analytics TO ROLE analyser;
+GRANT reference_usage ON DATABASE dbt_analytics TO ROLE analyser;
+GRANT modify ON DATABASE dbt_analytics TO ROLE analyser;
+GRANT monitor ON DATABASE dbt_analytics TO ROLE analyser;
+GRANT create schema ON DATABASE dbt_analytics TO ROLE analyser;
+```
 
-3. Create a new dbt project.
-    1. Give a name to your project.
-    2. Choose a warehouse (Snowflake). Insert the required information (i.e., Account, Database, Warehouse, Role)
-    3. Select the repository you created earlier as the codebase for your dbt project.
+> [!NOTE]
+> In the context of this project, a single database `dbt_analytics` is used for both the source and the model-generated tables. In case the source tables were stored in a different database than the one used for the transformations, then we would need to grant privileges to the `analyser` role to get access to this database.
+
+### Set up a dbt Cloud Account
+Set up a dbt Cloud account if you don't have one already (if you do, just create a new project) and follow Step 4 in the [dbt-snowflake connection guide ](https://docs.getdbt.com/guides/snowflake/), to connect Snowflake to dbt Cloud. Make sure the user you configure for your connections has [adequate database permissions ](https://docs.getdbt.com/reference/database-permissions/about-database-permissions) to run dbt in the `dbt_analytics` database.
+
+### Create a New dbt Project.
+1. Name your project — Choose a meaningful name to identify your dbt project.
+2. Configure your data warehouse — Select Snowflake as the warehouse and provide the required connection details:
+   - Account
+   - Database
+   - Warehouse
+   - Role
+3. Connect your GitHub repository — Select the repository you created earlier to serve as the codebase for this dbt project.
 
 
 
