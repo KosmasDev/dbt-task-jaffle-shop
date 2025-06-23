@@ -71,8 +71,6 @@ CREATE DATABASE dbt_analytics
     2. Choose a warehouse (Snowflake). Insert the required information (i.e., Account, Database, Warehouse, Role)
     3. Select the repository you created earlier as the codebase for your dbt project.
 
-![image](https://github.com/user-attachments/assets/305cc6bc-c2b9-4388-bd42-d9eab90bcda6)
-
 
 
 
