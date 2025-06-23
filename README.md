@@ -70,15 +70,15 @@ Please feel free to delete the remaining files, as they are not needed for this 
 1. Ensure you have the correct role `ACCOUNTADMIN` to create new roles and grant privileges
 2. Create a logical database in your data warehouse for this project. The database name used in this project is `dbt_analytics`
 ```sql
-CREATE DATABASE dbt_analytics
+CREATE DATABASE dbt_analytics;
 ```
 3. Create a dedicated warehouse used for the transformation processes called `transforming`
 ```sql
-CREATE WAREHOUSE analysing with WAREHOUSE_SIZE = 'SMALL'
+CREATE WAREHOUSE analysing with WAREHOUSE_SIZE = 'SMALL';
 ```
 4. Set up a role for you (as a developer) to access the warehouse and the database that you have created
 ```sql
-CREATE ROLE analyser
+CREATE ROLE analyser;
 ```
 5. Grant the below privileges to the `analyser` role
 ```sql
@@ -90,7 +90,12 @@ GRANT create schema ON DATABASE dbt_analytics TO ROLE analyser;
 ```
 
 > [!NOTE]
-> In this project, both the source tables and the model-generated tables are stored in the same database: dbt_analytics. If the source tables were located in a different database, additional privileges would need to be granted to the `analyser` role to ensure it has access to that database.
+> In this project, both the source tables and the model-generated tables are stored in the same database: dbt_analytics. If the source tables were located in a different database, additional privileges would need to be granted to the `analyser` role to ensure it has access to that database. For example, if the source tables were saved under a database `source_db` schema `raw`, we should run the following commands.
+> ```sql
+> GRANT import privileges ON DATABASE source_db TO ROLE analyser;
+> GRANT usage ON SCHEMA source_db.raw TO ROLE analyser;
+> GRANT select on all tables IN SCHEMA source_db.raw TO ROLE analyser;
+> ```
 
 ### Set up a dbt Cloud Account
 Set up a dbt Cloud account if you don't have one already (if you do, just create a new project) and follow Step 4 in the [dbt-snowflake connection guide ](https://docs.getdbt.com/guides/snowflake/), to connect Snowflake to dbt Cloud. Make sure the user you configure for your connections has [adequate database permissions ](https://docs.getdbt.com/reference/database-permissions/about-database-permissions) to run dbt in the `dbt_analytics` database.
