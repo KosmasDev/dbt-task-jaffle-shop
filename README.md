@@ -1,5 +1,7 @@
 # 📊 Customer Analytics with dbt Cloud - ***by Kosmas Strakosia***
 
+## 📝 Introduction
+
 This project is designed to help you explore the core functionality and key features of the dbt Cloud platform. It uses a fictional restaurant - the Jaffle Shop - as the basis for working with realistic, relatable data.
 
 The purpose of this README is to guide you through:
@@ -10,7 +12,7 @@ The purpose of this README is to guide you through:
 
 By the end of this project, you'll have hands-on experience with building a modern analytics workflow using dbt Cloud.
 
-## ❓ Purpose & Insights
+## ❓ Purpose
 
 The main purpose of this project is to explore the dbt Cloud features and utilize its functionalities to load, transform, and analyse the required data to answer the following questions.
 - Which customer has visited more locations?
