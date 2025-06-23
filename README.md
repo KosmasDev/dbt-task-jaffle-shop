@@ -128,12 +128,12 @@ There are multiple ways to load the data for this project. Below, you’ll find 
       ![image](https://github.com/user-attachments/assets/450aff5f-d014-4aab-b8f5-543534ff5cb8)
       
     - Next, we need to run the following dbt command to generate the seed tables. Once executed successfully, the resulting tables will appear in Snowflake as shown in the screenshot below.
-> ```sql
-> dbt seed --full-refresh --vars '{"load_source_data": true}'
-> ```
+```sql
+dbt seed --full-refresh --vars '{"load_source_data": true}'
+```
 ![image](https://github.com/user-attachments/assets/33c0e6fc-6cb7-49c0-8231-8c13ff601bfa)
 
-    - fesafdfsdgfd
+
 
 > [!IMPORTANT]
 > Seeds in dbt are static CSV files typically used to upload small reference datasets that support modeling workflows. In this project, seeds are leveraged as a convenient way to ingest sample data quickly. While this is not the primary purpose of seeds - ***since dbt is not designed as a data ingestion or loading tool*** - using seeds in this way allows us to focus on building and testing models without needing to set up a full external data pipeline.
