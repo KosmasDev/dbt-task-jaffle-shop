@@ -204,11 +204,12 @@ The same process must be applied to all six tables involved in this project. Bel
 ✅ With the setup complete, we’re ready to proceed to the next step.
 
 ### 🛠️ Develop Models
-The `models` folder of the repo, holds all the SQL models we build, which define transformations and shape data in our warehouse. Usually, these models are split into different layers or folders to enforce modularity, clarity, and maintainability. In the screenshot below, you can see the data flow that visualises the connections of the models created. 
+The `models` folder of the repo, holds all the SQL models we build, which define transformations and shape data in our warehouse. Usually, these models are split into different layers or folders to enforce modularity, clarity, and maintainability. In the screenshot below, you can see the data flow that visualises the connections of the models that will be created. 
 
-![Screenshot 2025-06-23 221125](https://github.com/user-attachments/assets/bf4b39ce-bc13-4ad0-9887-cd524b34976e)
+![Screenshot 2025-06-23 221912](https://github.com/user-attachments/assets/e093b1e5-d1ef-4202-b353-1338f4ace26b)
 
 #### 🏗️ Create Staging Layer Models
+
 
 
 
