@@ -59,5 +59,11 @@ Please feel free to delete the remaining files, as they are not needed for this 
 > [!IMPORTANT]
 > Before removing any files, ensure that each existing folder contains a placeholder file named .gitkeep. This will allow you to clean up unnecessary files while still preserving the folder structure in version control.
 
+## dbt Platform setup
+1. Create a logical database in your data warehouse for this project. The database name used in this project is `dbt_analytics`. We recommend using the name jaffle_shop for consistency with the project.
+
+
+
+
 
 
