@@ -1,4 +1,4 @@
-# 📊 Customer Analytics with dbt Cloud                                                                               ### ***by Kosmas Strakosia***
+# 📊 Customer Analytics with dbt Cloud - ***by Kosmas Strakosia***
 
 This project is designed to help you explore the core functionality and key features of the dbt Cloud platform. It uses a fictional restaurant - the Jaffle Shop - as the basis for working with realistic, relatable data.
 
