@@ -151,16 +151,13 @@ SELECT * FROM dbt_analytics.dbt_kstrakosia_raw.raw_supplies;
 ```
 
 #### 💾 Approach 2: Load the data from S3
-- Set Up the Target Schema
-
-*(Define the schema that will house the source tables)*
+- Set Up the Target Schema *(Define the schema that will house the source tables)*
 ```sql
 CREATE SCHEMA dbt_analytics.dbt_kstrakosia_raw;
 ```
 
-- Create Source Table Structures
-
-*(Initialize empty tables to receive the source data)*
+- Create Source Table Structures *(Initialize empty tables to receive the source data)*
+Example for the `raw_orders` table.
 ```sql
 CREATE OR REPLACE TABLE dbt_analytics.dbt_kstrakosia_raw.raw_orders
 ( id varchar(100),
@@ -174,7 +171,7 @@ CREATE OR REPLACE TABLE dbt_analytics.dbt_kstrakosia_raw.raw_orders
 ```
 
 - Load Source Data from Amazon S3
-  *(Ingest raw data from S3 into the corresponding source tables)*
+Example for the `raw_orders` table.
 ```sql
 COPY INTO dbt_raw.jaffle_shop.orders (
     id,
@@ -192,6 +189,17 @@ file_format = (
     skip_header = 1
     );
 ```
+
+The same process should be repeated for all six tables included in this project. Please, find below the URIs of the tables you will need to copy into your database.
+
+| table name        | S3 URI                                                           | Direct Download Link                                                                                     | Schema                                                                                                    |
+|-------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| `raw_customers` | `s3://dbt-tutorial-public/long_term_dataset/raw_customers.csv` | [Download](https://dbt-tutorial-public.s3.us-west-2.amazonaws.com/long_term_dataset/raw_customers.csv) | `(id text, name text)` |
+| `raw_orders` | `s3://dbt-tutorial-public/long_term_dataset/raw_orders.csv` | [Download](https://dbt-tutorial-public.s3.us-west-2.amazonaws.com/long_term_dataset/raw_orders.csv) | `(id text, customer text, ordered_at datetime, store_id text, subtotal int, tax_paid int, order_total int)` |
+| `raw_order_items` | `s3://dbt-tutorial-public/long_term_dataset/raw_order_items.csv` | [Download](https://dbt-tutorial-public.s3.us-west-2.amazonaws.com/long_term_dataset/raw_order_items.csv) | `(id text, order_id text, sku text)` |
+| `raw_products` | `s3://dbt-tutorial-public/long_term_dataset/raw_products.csv` | [Download](https://dbt-tutorial-public.s3.us-west-2.amazonaws.com/long_term_dataset/raw_products.csv) | `(sku text, name text, type text, price int, description text)` |
+| `raw_supplies` | `s3://dbt-tutorial-public/long_term_dataset/raw_supplies.csv` | [Download](https://dbt-tutorial-public.s3.us-west-2.amazonaws.com/long_term_dataset/raw_supplies.csv) | `(id text, name text, cost int, perishable boolean, sku text)` |
+| `raw_stores` | `s3://dbt-tutorial-public/long_term_dataset/raw_stores.csv` | [Download](https://dbt-tutorial-public.s3.us-west-2.amazonaws.com/long_term_dataset/raw_stores.csv) | `(id text, name text, opened_at datetime, tax_rate float)` |
 
 ✅ With the setup complete, we’re ready to proceed to the next step.
 
