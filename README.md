@@ -211,7 +211,12 @@ The `models` folder of the repo, holds all the SQL models we build, which define
 #### 🏗️ Create Staging Layer Models
 Staging models sit right on top of the raw data *(including source tables)*. They perform basic cleaning and normalization of source data. Raw source data is usually inconsistent or has unclear naming conventions. Staging creates a clean and reliable layer that downstream models can depend on without having to handle source inconsistencies each time.
 
-- 📝 Create the __sources.yml file
+- 🧰 Configure the dbt_project.yml file for Staging
+
+sdf
+
+
+- 🧭 Create the __sources.yml file
 
 The `__sources.yml` file in the `models/staging` folder plays a very important role in how dbt connects to and tracks the raw data in the warehouse. It is a source declaration file that is used to "show" to dbt that the data already exist in the warehouse, in order for it to refer to this data as a trusted input in the models. 
 
@@ -315,8 +320,7 @@ models:
 ```
 
 
-
-
-
+- Lineage of the final model (the 3rd model is not included here as I have included it under the Analyses folder) 
+![image](https://github.com/user-attachments/assets/d3def913-842b-4a80-97c8-17877bc59aa9)
 
 
