@@ -67,8 +67,8 @@ Please feel free to delete the remaining files, as they are not needed for this 
 ## dbt Platform setup
 
 ### Configure Snowflake for dbt Cloud
-1. Ensure you have the correct role `ACCOUNTADMIN` to create new roles and grant privileges
-2. Create a logical database in your data warehouse for this project. The database name used in this project is `dbt_analytics`
+1. Ensure you have the correct role `ACCOUNTADMIN` to create new roles and grant privileges.
+2. Create a logical database in your data warehouse for this project. The database name used in this project is `dbt_analytics`. In this project, both the source tables and the model-generated tables/views are stored in the same database: dbt_analytics.  
 ```sql
 CREATE DATABASE dbt_analytics;
 ```
@@ -89,12 +89,12 @@ GRANT monitor ON DATABASE dbt_analytics TO ROLE analyser;
 GRANT create schema ON DATABASE dbt_analytics TO ROLE analyser;
 ```
 
-> [!NOTE]
-> In this project, both the source tables and the model-generated tables are stored in the same database: dbt_analytics. If the source tables were located in a different database, additional privileges would need to be granted to the `analyser` role to ensure it has access to that database. For example, if the source tables were saved under a database `source_db` schema `raw`, we should run the following commands.
+> [!TIP]
+> If the source tables were located in a different database, additional privileges would need to be granted to the `analyser` role to ensure it has access to that database. For example, if the source tables were saved under a database `source_db` schema `raw`, we should run the following commands.
 > ```sql
 > GRANT import privileges ON DATABASE source_db TO ROLE analyser;
 > GRANT usage ON SCHEMA source_db.raw TO ROLE analyser;
-> GRANT select on all tables IN SCHEMA source_db.raw TO ROLE analyser;
+> GRANT SELECT ON all tables IN SCHEMA source_db.raw TO ROLE analyser;
 > ```
 
 ### Set up a dbt Cloud Account
