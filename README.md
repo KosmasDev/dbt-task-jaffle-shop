@@ -151,12 +151,16 @@ SELECT * FROM dbt_analytics.dbt_kstrakosia_raw.raw_supplies;
 ```
 
 #### 💾 Approach 2: Load the data from S3
-- Create the schema that will be used to store the source tables.
+- Set Up the Target Schema
+
+*(Define the schema that will house the source tables)*
 ```sql
 CREATE SCHEMA dbt_analytics.dbt_kstrakosia_raw;
 ```
 
-- Create the tables that will be populated with the source data.
+- Create Source Table Structures
+
+*(Initialize empty tables to receive the source data)*
 ```sql
 CREATE OR REPLACE TABLE dbt_analytics.dbt_kstrakosia_raw.raw_orders
 ( id varchar(100),
@@ -169,15 +173,19 @@ CREATE OR REPLACE TABLE dbt_analytics.dbt_kstrakosia_raw.raw_orders
 );
 ```
 
-- Populate the table with S3 source data
+- Load Source Data from Amazon S3
+
+*(Ingest raw data from S3 into the corresponding source tables)*
 ```sql
-COPY INTO dbt_raw.jaffle_shop.orders (id,
-                                      customer_id,
-                                      ordered_at,
-                                      store_id,
-                                      subtotal,
-                                      tax_paid,
-                                      order_total)
+COPY INTO dbt_raw.jaffle_shop.orders (
+    id,
+    customer_id,
+    ordered_at,
+    store_id,
+    subtotal,
+    tax_paid,
+    order_total
+    )
 from 's3://dbt-tutorial-public/long_term_dataset/raw_orders.csv'
 file_format = (
     type = 'CSV'
