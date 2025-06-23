@@ -12,9 +12,9 @@ The purpose of this README is to guide you through:
 
 By the end of this project, you'll have hands-on experience with building a modern analytics workflow using dbt Cloud.
 
-## ❓ Purpose
+## 🔍 Customer Behavior Analysis
 
-The main purpose of this project is to explore the dbt Cloud features and utilize its functionalities to load, transform, and analyse the required data to answer the following questions.
+The objective of this project is to leverage dbt Cloud's capabilities to ingest, transform, and analyze customer and order data in order to answer key business questions related to customer engagement and loyalty. Specifically, the analysis focuses on the following insights:
 - Which customer has visited more locations?
 - List the most loyal customer per location.
 - Has anyone ordered everything?
