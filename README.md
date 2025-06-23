@@ -217,11 +217,9 @@ In this project, our primary focus within the SQL models is to standardize and c
 
 ```sql
 WITH 
-
 source AS ( 
     SELECT * FROM {{ source('ecom', 'raw_orders') }}
 ),
-
 renamed AS (
     SELECT 
         ID AS ORDER_ID,
@@ -234,7 +232,6 @@ renamed AS (
     FROM
         source
 )
-
 SELECT * FROM renamed
 ```
 
