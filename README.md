@@ -134,7 +134,7 @@ seeds:
   dbt_task_analytics:   # specify the project name
     +schema: raw        # Target schema
     jaffle-data:        # refers to the 'jaffle-data' folder
-      +enabled: "{{ var('load_source_data', false) }}"  # Conditionally enables the 'jaffle-data' seed based on the 'load_source_data' variable
+      +enabled: "{{ var('load_source_data', false) }}"  # Conditionally enables the seed based on the 'load_source_data' variable
                                                         # If 'load_source_data' is set to true, this seed will be loaded
 ```
       
@@ -220,7 +220,24 @@ Staging models sit right on top of the raw data *(including source tables)*. The
 
 - 🧰 Configure the dbt_project.yml file for Staging
 
-sdf
+```yml
+models:
+  dbt_task_analytics:           # This is the dbt "project" name
+    staging:                    # This refers to the `models/staging` folder
+      +schema: dev              # These models will be built in the "dev" schema
+      +materialized: view       # These models will be materialized as views
+```
+We are applying folder-level configuration for everything under `models/staging`. 
+Materialization is how dbt physically creates your models in the data warehouse.
+In staging, we mainly clean up column names, cast data types, and create some times reusable logic. Hence, it's best practice to use the view materialization for these models, because they're simple, we want them to reflect the latest source data, and we don't need to store them as physical tables.
+
+> [!IMPORTANT]
+> The dbt_project.yml is the central configuration file for the dbt project. It tells dbt:
+> - Where your models live
+> - How they should be materialized (i.e., built in the warehouse)
+> - Which schema to use
+> - Other settings like testing, documentation, seeds, macros
+> So, every time we run `dbt run`, `dbt test`, `dbt build`, etc., dbt consults this file to know what to do with the models.
 
 
 - 🧭 Create the __sources.yml file
