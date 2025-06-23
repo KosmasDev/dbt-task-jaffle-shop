@@ -233,7 +233,7 @@ In staging, we mainly clean up column names, cast data types, and create some ti
 
 > [!IMPORTANT]
 > The dbt_project.yml is the central configuration file for the dbt project. It tells dbt:
-> - Where your models live
+> - Where the models live
 > - How they should be materialized (i.e., built in the warehouse)
 > - Which schema to use
 > - Other settings like testing, documentation, seeds, macros
