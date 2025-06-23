@@ -128,8 +128,16 @@ There are multiple ways to load the data for this project. Below, you’ll find 
 
 #### 🗂️ Approach 1: Utilize the sample data in the repo
 - To populate the source files located in `seeds/jaffle-data` as tables in Snowflake, we first need to configure the `dbt_project.yml` file, as shown in the screenshot below. In this file, we define the project name (`dbt_task_analytics`) and specify the target schema where the seed tables will be created — in this case, `raw`. Note that the database does not need to be defined in this file, as it is configured separately within the dbt Cloud connection settings. Please find the `dbt_project.yml` file [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/blob/dev/dbt_project.yml).
-    
-![image](https://github.com/user-attachments/assets/450aff5f-d014-4aab-b8f5-543534ff5cb8)
+
+```yml
+seeds:
+  dbt_task_analytics:  # Project-level config for seed files in the 'dbt_task_analytics' project
+    +schema: raw        # All seed tables will be loaded into the 'raw' schema in the target database
+    jaffle-data:        # Specific configuration for the 'jaffle-data.csv' seed file
+      +enabled: "{{ var('load_source_data', false) }}"  
+        # Conditionally enables the 'jaffle-data' seed based on the 'load_source_data' variable
+        # If 'load_source_data' is set to true, this seed will be loaded
+```
       
 - Next, we need to run the following dbt command to generate the seed tables. Once executed successfully, the resulting tables will appear in Snowflake as shown in the screenshot below. 
 ```sql
