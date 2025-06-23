@@ -123,7 +123,10 @@ This section provides a step-by-step guide to loading the datasets, transforming
 ### 📥 Load the Data
 There are multiple ways to load the data for this project. Below, you’ll find the approach used in this setup, along with an alternative method you can consider.
 - **Approach 1: Utilize the sample data in the repo**
-    - In order for the files included in the folder *seeds>jaffle-data* to be populated as tables in Snowflake, we need to run a dbt command, but first, we need to configure the dbt_project.yml file as it is shown in the following picture. 
+    - In order for the files included in the folder ***seeds>jaffle-data*** to be populated as tables in Snowflake, we need to run a dbt command, but first, we need to configure the dbt_project.yml file as it is shown in the following picture. In this file, we need to define the name of the project `dbt_task_analytics` and the name of the schema that the source tables will be stored (in this case is `raw`). The database does not need to be defined here, as it is configured directly in the dbt Cloud connections settings.
+      ![image](https://github.com/user-attachments/assets/450aff5f-d014-4aab-b8f5-543534ff5cb8)
+
+
 > [!IMPORTANT]
 > Seeds in dbt are static CSV files typically used to upload small reference datasets that support modeling workflows. In this project, seeds are leveraged as a convenient way to ingest sample data quickly. While this is not the primary purpose of seeds - ***since dbt is not designed as a data ingestion or loading tool*** - using seeds in this way allows us to focus on building and testing models without needing to set up a full external data pipeline.
 
