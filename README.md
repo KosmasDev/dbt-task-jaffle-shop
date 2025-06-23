@@ -244,6 +244,35 @@ The YAML files are model metadata files in the `models/staging` folder, and they
     - The SQL contains the logic
     - The YAML contains the metadata and validations
 
+Below you can find the content of the `stg_orders.yml`. You can find all the staging .yml files [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/tree/dev/models/staging).
+
+```bash
+models:
+  - name: stg_orders
+    description: Order data with basic cleaning and transformation applied, one row per order.
+    data_tests:
+      - dbt_utils.expression_is_true:
+          expression: "total_price - tax = pretax_price"
+    columns:
+      - name: order_id
+        description: The unique key of the table (i.e. unique identifier for each order).
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: The unique identifier for each customer.
+        data_tests:
+          - not_null
+      - name: location_id
+        description: The unique identifier for each store location.
+        data_tests:
+          - not_null
+      - name: order_date
+        description: The date that each order was placed.
+        data_tests:
+          - not_null
+```
+
 
 
 
