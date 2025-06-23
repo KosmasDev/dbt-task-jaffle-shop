@@ -287,7 +287,7 @@ Below you can find the content of the `stg_orders.yml`. The quality tests are on
     
 You can find all the staging .yml files [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/tree/dev/models/staging).
 
-```bash
+```text
 models:
   - name: stg_orders
     description: Order data with basic cleaning and transformation applied, one row per order.
