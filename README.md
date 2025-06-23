@@ -108,6 +108,9 @@ Set up a dbt Cloud account if you don't have one already (if you do, just create
    - Warehouse
    - Role
 3. Connect your GitHub repository — Select the repository you created earlier to serve as the codebase for this dbt project.
+4. Click on the 'Studio' button on the left bar. This will bring you into the dbt Cloud IDE, the main environment where all the transformations will happen.
+![image](https://github.com/user-attachments/assets/e4d3918e-edb4-4a78-9910-0803f41ee0dd)
+
 
 
 
