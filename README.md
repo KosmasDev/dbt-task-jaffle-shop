@@ -10,7 +10,7 @@ The purpose of this README is to guide you through:
 
 By the end of this project, you'll have hands-on experience with building a modern analytics workflow using dbt Cloud.
 
-## Purpose & Insights
+## ❓ Purpose & Insights
 
 The main purpose of this project is to explore the dbt Cloud features and utilize its functionalities to load, transform, and analyse the required data to answer the following questions.
 - Which customer has visited more locations?
@@ -20,19 +20,19 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
 > [!NOTE]
 > This document primarily focuses on the process of loading data and building models that can be used to generate valuable customer insights. It is not intended as a detailed guide for configuring the dbt-Snowflake connection or setting up a full dbt environment. Instead, it provides high-level setup instructions, along with links to official documentation for more detailed guidance.
 
-## Table of Contents
+## 📘 Table of Contents
 1. [Prerequisites](#prerequisites)
 2. [Initializing your repository – create and fork](#initializing-your-repository--create-and-fork)
     1. [Step 1: Create a new repository](#step-1-create-a-new-repository)
     2. [Step 2: Fork the jaffle shop project](#step-2-fork-the-jaffle-shop-project)
 3. [Clean up the repository](#clean-up-the-repository)
-4. [dbt Platform setup](#dbt-platform-setup)
+4. [dbt Cloud Platform setup](#dbt-cloud-platform-setup)
     1. [Configure Snowflake for dbt Cloud](#configure-snowflake-for-dbt-cloud)
     2. [Set up a dbt Cloud Account](#set-up-a-dbt-cloud-account)
     3. [Create a New dbt Project](#create-a-new-dbt-project)
 
 
-## Prerequisites
+## 📌 Prerequisites
 - A dbt Cloud account (a 14-day free trial is available)
 - Access to a data warehouse with the necessary permissions to:
     - Create a new database for this project
@@ -40,7 +40,7 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
 > [!NOTE]
 > In this project, Snowflake is used as the data warehouse, but you can adapt it to other supported platforms if needed.
 
-## Initializing your repository – Create and fork
+## 🚀 Initializing your repository – Create and fork
 
 ### Step 1: Create a new repository
 1. Go to your GitHub account.
@@ -54,7 +54,7 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
 3. Click the "Fork" button (top-right corner of the page).
 4. Select your newly created repo (dbt-task-jaffle-shop) as the destination.
 
-## Clean up the repository
+## 🗑️ Clean up the repository
 Only the following items from this repository are required:
 - The files located in the seeds/jaffle-data folder
 - The dbt_project.yml file
@@ -64,7 +64,7 @@ Please feel free to delete the remaining files, as they are not needed for this 
 > [!IMPORTANT]
 > Before removing any files, ensure that each existing folder contains a placeholder file named .gitkeep. This will allow you to clean up unnecessary files while still preserving the folder structure in version control.
 
-## dbt Platform setup
+## ⚙️ dbt Cloud Platform setup
 
 ### Configure Snowflake for dbt Cloud
 1. Ensure you have the correct role `ACCOUNTADMIN` to create new roles and grant privileges.
