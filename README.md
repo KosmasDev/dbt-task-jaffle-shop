@@ -220,6 +220,10 @@ Staging models sit right on top of the raw data *(including source tables)*. The
 
 - 🧰 Configure the dbt_project.yml file for Staging
 
+We need to apply folder-level configuration for everything under `models/staging`. In this context, we need to define the target schema of the staging tables and the materialization type.
+
+Materialization is how dbt physically creates your models in the data warehouse. In staging, we mainly clean up column names, cast data types, and create some times reusable logic. Hence, it's best practice to use the view materialization for these models, because they're simple, we want them to reflect the latest source data, and we don't need to store them as physical tables. The following code snippet is related only to the staging configurations. Please find the complete `dbt_project.yml` [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/blob/dev/dbt_project.yml).
+
 ```yml
 models:
   dbt_task_analytics:           # This is the dbt "project" name
@@ -227,9 +231,6 @@ models:
       +schema: dev              # These models will be built in the "dev" schema
       +materialized: view       # These models will be materialized as views
 ```
-We are applying folder-level configuration for everything under `models/staging`. 
-Materialization is how dbt physically creates your models in the data warehouse.
-In staging, we mainly clean up column names, cast data types, and create some times reusable logic. Hence, it's best practice to use the view materialization for these models, because they're simple, we want them to reflect the latest source data, and we don't need to store them as physical tables.
 
 > [!IMPORTANT]
 > The dbt_project.yml is the central configuration file for the dbt project. It tells dbt:
