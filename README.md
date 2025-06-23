@@ -66,6 +66,9 @@ CREATE DATABASE dbt_analytics
 ```
 2. Set up a dbt Cloud account if you don't have one already (if you do, just create a new project) and follow Step 4 in the [dbt-snowflake connection guide ](https://docs.getdbt.com/guides/snowflake/), to connect Snowflake to dbt Cloud. Make sure the user you configure for your connections has [adequate database permissions ](https://docs.getdbt.com/reference/database-permissions/about-database-permissions) to run dbt in the `dbt_analytics` database.
 
+3. dsafsda;f
+![image](https://github.com/user-attachments/assets/305cc6bc-c2b9-4388-bd42-d9eab90bcda6)
+
 
 
 
