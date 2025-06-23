@@ -174,8 +174,7 @@ CREATE OR REPLACE TABLE dbt_analytics.dbt_kstrakosia_raw.raw_orders
 ```
 
 - Load Source Data from Amazon S3
-
-*(Ingest raw data from S3 into the corresponding source tables)*
+  *(Ingest raw data from S3 into the corresponding source tables)*
 ```sql
 COPY INTO dbt_raw.jaffle_shop.orders (
     id,
