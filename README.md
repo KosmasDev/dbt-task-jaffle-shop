@@ -18,7 +18,7 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
 - Has anyone ordered everything?
 
 > [!NOTE]
-> This document primarily focuses on the process of loading data and building models that can be used to generate valuable customer insights. It is not intended as a detailed guide for configuring the dbt-Snowflake connection or setting up a full dbt environment. Instead, it provides high-level setup instructions, along with links to official documentation for more detailed guidance.
+> This document primarily focuses on the process of loading data and building models that can be used to generate valuable customer insights. It is **not intended as a detailed guide** for configuring the dbt-Snowflake connection or setting up a full dbt environment. Instead, it provides high-level setup instructions, along with links to official documentation for more detailed guidance.
 
 ## 📘 Table of Contents
 1. [Prerequisites](#prerequisites)
