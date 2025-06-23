@@ -124,7 +124,7 @@ This section provides a step-by-step guide to loading the datasets, transforming
 There are multiple ways to load the data for this project. Below, you’ll find the approach used in this setup, along with an alternative method you can consider.
 
 > [!IMPORTANT]
-> Seeds in dbt are static CSV files typically used to upload small reference datasets that support modeling workflows. In this project, seeds are leveraged as a convenient way to ingest sample data quickly. While this is not the primary purpose of seeds - ***since dbt is not designed as a data ingestion or loading tool*** - using seeds in this way allows us to focus on building and testing models without needing to set up a full external data pipeline.
+> Seeds in dbt are static CSV files typically used to upload small reference datasets that support modeling workflows. In this project, seeds are leveraged as a convenient way to ingest sample data quickly. While this is not the primary purpose of seeds - ***since dbt is not designed as a data ingestion or loading tool*** - using seeds in this way allows us to focus on building and testing models without needing to set up a full external data pipeline. In the context of this project, we followed Approach 1.
 
 #### 🗂️ Approach 1: Utilize the sample data in the repo
 - To populate the source files located in `seeds/jaffle-data` as tables in Snowflake, we first need to configure the `dbt_project.yml` file, as shown in the screenshot below. In this file, we define the project name (`dbt_task_analytics`) and specify the target schema where the seed tables will be created — in this case, `raw`. Note that the database does not need to be defined in this file, as it is configured separately within the dbt Cloud connection settings. Please find the `dbt_project.yml` file [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/blob/dev/dbt_project.yml).
@@ -151,7 +151,40 @@ SELECT * FROM dbt_analytics.dbt_kstrakosia_raw.raw_supplies;
 ```
 
 #### 💾 Approach 2: Load the data from S3
+- Create the schema that will be used to store the source tables.
+```sql
+CREATE SCHEMA dbt_analytics.dbt_kstrakosia_raw;
+```
 
+- Create the tables that will be populated with the source data.
+```sql
+CREATE OR REPLACE TABLE dbt_analytics.dbt_kstrakosia_raw.raw_orders
+( id varchar(100),
+  customer varchar(100),
+  ordered_at TIMESTAMP_NTZ,
+  store_id varchar(100),
+  subtotal NUMERIC(10,2),
+  tax_paid NUMERIC(10,2),
+  order_total NUMERIC(10,2)
+);
+```
+
+- Populate the table with S3 source data
+```sql
+COPY INTO dbt_raw.jaffle_shop.orders (id,
+                                      customer_id,
+                                      ordered_at,
+                                      store_id,
+                                      subtotal,
+                                      tax_paid,
+                                      order_total)
+from 's3://dbt-tutorial-public/long_term_dataset/raw_orders.csv'
+file_format = (
+    type = 'CSV'
+    field_delimiter = ','
+    skip_header = 1
+    );
+```
 
 ✅ With the setup complete, we’re ready to proceed to the next step.
 
