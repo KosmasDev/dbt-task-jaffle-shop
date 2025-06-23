@@ -138,19 +138,18 @@ You can notice that the schema name is not `raw` as defined in the `dbt_project.
 
 Before proceeding to the next step, ensure that the Snowflake tables have been successfully created and populated as expected.
 ```sql
-SELECT * FROM dbt_analytics.dbt_<your-username>_raw.raw_customers;
-SELECT * FROM dbt_analytics.dbt_<your-username>_raw.raw_items;
-SELECT * FROM dbt_analytics.dbt_<your-username>_raw.raw_orders;
-SELECT * FROM dbt_analytics.dbt_<your-username>_raw.raw_products;
-SELECT * FROM dbt_analytics.dbt_<your-username>_raw.raw_stores;
-SELECT * FROM dbt_analytics.dbt_<your-username>_raw.raw_supplies;
+SELECT * FROM dbt_analytics.dbt_kstrakosia_raw.raw_customers;
+SELECT * FROM dbt_analytics.dbt_kstrakosia_raw.raw_items;
+SELECT * FROM dbt_analytics.dbt_kstrakosia_raw.raw_orders;
+SELECT * FROM dbt_analytics.dbt_kstrakosia_raw.raw_products;
+SELECT * FROM dbt_analytics.dbt_kstrakosia_raw.raw_stores;
+SELECT * FROM dbt_analytics.dbt_kstrakosia_raw.raw_supplies;
 ```
-
-✅ We should now be ready to move to the next step!
 
 > [!IMPORTANT]
 > Seeds in dbt are static CSV files typically used to upload small reference datasets that support modeling workflows. In this project, seeds are leveraged as a convenient way to ingest sample data quickly. While this is not the primary purpose of seeds - ***since dbt is not designed as a data ingestion or loading tool*** - using seeds in this way allows us to focus on building and testing models without needing to set up a full external data pipeline.
 
+✅ With the setup complete, we’re ready to proceed to the next step.
 
 
 
