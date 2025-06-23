@@ -1,4 +1,4 @@
-# 📊 Customer Analytics with dbt Cloud - ***by Kosmas Strakosia***
+# Customer Analytics with dbt Cloud - ***by Kosmas Strakosia***
 
 ## 📝 Introduction
 
