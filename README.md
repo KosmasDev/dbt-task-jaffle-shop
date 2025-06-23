@@ -18,7 +18,7 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
 - Has anyone ordered everything?
 
 > [!NOTE]
-> In the context of this project, the main focus will be on the processes of the    (The raw datasets used in the context of this project are included in the folder [seeds/jaffle-data](https://github.com/KosmasDev/dbt-task-jaffle-shop/tree/main/seeds/jaffle-data).)
+> This document primarily focuses on the process of loading data and building models that can be used to generate valuable customer insights. It is not intended as a detailed guide for configuring the dbt-Snowflake connection or setting up a full dbt environment. Instead, it provides high-level setup instructions, along with links to official documentation for more detailed guidance.
 
 ## Table of Contents
 1. [Prerequisites](#prerequisites)
