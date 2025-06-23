@@ -211,9 +211,9 @@ The `models` folder of the repo, holds all the SQL models we build, which define
 #### 🏗️ Create Staging Layer Models
 Staging models sit right on top of the raw data *(including source tables)*. They perform basic cleaning and normalization of source data. Raw source data is usually inconsistent or has unclear naming conventions. Staging creates a clean and reliable layer that downstream models can depend on without having to handle source inconsistencies each time.
 
-- 📝 Staging SQL files
+- 📝 Create staging SQL files
 
-In this project, our primary focus within the staging models is to standardize and clarify column names—especially when original names lack clear context or meaning. Below is an example (`stg_orders.sql`) located in the `models/staging` folder, where we apply these naming improvements as part of the staging process. You can find all the staging .sql files [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/tree/dev/models/staging).
+In this project, our primary focus within the staging models is to standardize and clarify column names—especially when original names lack clear context or meaning. Below is an example (`stg_orders.sql`) located in the `models/staging` folder, where we apply these naming improvements as part of the staging process. All the staging models pull data from the source tables saved in the `raw` schema. You can find all the staging .sql files [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/tree/dev/models/staging).
 
 ```sql
 WITH 
@@ -235,11 +235,14 @@ renamed AS (
 SELECT * FROM renamed
 ```
 
-- 📄 Staging YAML files
+- 📄 Create staging YAML files
 
-The YAML files are a model metadata files in the `models/staging` folder, and they are used in dbt to:
+The YAML files are model metadata files in the `models/staging` folder, and they are used in dbt to:
 1. Document the models and columns by providing a human-readable description of what the model `stg_orders` represents and what each column means. Based on this YAML file the we can generate auto-docs in dbt Cloud using this metadata.
-2. Define data quality tests 
+2. Define data quality tests.
+3. Keep documentation and tests close to the logic. By putting stg_orders.yml next to stg_orders.sql, we keep everything related to that model tightly organized.
+    - The SQL contains the logic
+    - The YAML contains the metadata and validations
 
 
 
