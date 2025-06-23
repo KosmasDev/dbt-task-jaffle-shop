@@ -69,19 +69,19 @@ Please feel free to delete the remaining files, as they are not needed for this 
 ### Configure Snowflake for dbt Cloud
 1. Ensure you have the correct role `ACCOUNTADMIN` to create new roles and grant privileges
 2. Create a logical database in your data warehouse for this project. The database name used in this project is `dbt_analytics`
-```bash
+```sql
 CREATE DATABASE dbt_analytics
 ```
 3. Create a dedicated warehouse used for the transformation processes called `transforming`
-```bash
+```sql
 CREATE WAREHOUSE analysing with WAREHOUSE_SIZE = 'SMALL'
 ```
 4. Set up a role for you (as a developer) to access the warehouse and the database that you have created
-```bash
+```sql
 CREATE ROLE analyser
 ```
 5. Grant the below privileges to the `analyser` role
-```bash
+```sql
 GRANT usage ON DATABASE dbt_analytics TO ROLE analyser;
 GRANT reference_usage ON DATABASE dbt_analytics TO ROLE analyser;
 GRANT modify ON DATABASE dbt_analytics TO ROLE analyser;
