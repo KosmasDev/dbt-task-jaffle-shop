@@ -6,7 +6,19 @@ models:
           expression: "total_price - tax = pretax_price"
     columns:
       - name: order_id
-        description: The unique key for each order.
+        description: The unique key of the table (i.e. unique identifier for each order).
         data_tests:
           - not_null
           - unique
+      - name: customer_id
+        description: The unique identifier for each customer.
+        data_tests:
+          - not_null
+      - name: location_id
+        description: The unique identifier for each store location.
+        data_tests:
+          - not_null
+      - name: order_date
+        description: The date that each order was placed.
+        data_tests:
+          - not_null

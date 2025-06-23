@@ -27,8 +27,8 @@ target-path: "target"
 seeds:
   dbt_task_analytics:
     +schema: raw
-    # jaffle-data:
-    #   +enabled: "{{ var('load_source_data', false) }}"
+    jaffle-data:
+      +enabled: "{{ var('load_source_data', false) }}"
 
 models:
   dbt_task_analytics:
