@@ -245,9 +245,10 @@ The YAML files are model metadata files in the `models/staging` folder, and they
     - The YAML contains the metadata and validations
 
 Below you can find the content of the `stg_orders.yml`. The quality tests are one of the most important parts of the file as we have defined that:
-    - `order_id` must be not null and unique
-    - `customer_id`, `location_id`, and `order_date` must all be not null
-    - The following row-level expression must hold TRUE: `total_price - tax = pretax_price`
+
+  - `order_id` must be not null and unique
+  - `customer_id`, `location_id`, and `order_date` must all be not null
+  - The following row-level expression must hold TRUE: `total_price - tax = pretax_price`
     
 You can find all the staging .yml files [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/tree/dev/models/staging).
 
