@@ -18,7 +18,7 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
 - Has anyone ordered everything?
 
 > [!NOTE]
-> This document primarily focuses on the process of loading data and building models that can be used to generate valuable customer insights. It is **not intended as a detailed guide** for configuring the dbt-Snowflake connection or setting up a full dbt environment. Instead, it provides high-level setup instructions, along with links to official documentation for more detailed guidance.
+> This document primarily focuses on the process of loading data and building models that can be used to generate valuable customer insights. It is **not intended as a detailed guide** for configuring the dbt-Snowflake connection or setting up a full dbt environment. Instead, it provides high-level setup instructions, along with links to official documentation for detailed guidance.
 
 ## 📘 Table of Contents
 1. [Prerequisites](#prerequisites)
@@ -39,7 +39,7 @@ The main purpose of this project is to explore the dbt Cloud features and utiliz
 > [!NOTE]
 > In this project, Snowflake is used as the data warehouse, but you can adapt it to other supported platforms if needed.
 
-## 🚀 Initializing your repository – Create and fork
+## 🆕 Initializing your repository – Create and fork
 
 ### Step 1: Create a new repository
 1. Go to your GitHub account.
@@ -109,6 +109,10 @@ Set up a dbt Cloud account if you don't have one already (if you do, just create
 4. Click on the 'Studio' button on the left bar. This will bring you into the dbt Cloud IDE, which is the browser-based editor that will enable you work on dbt models, seeds, macros, and other files. 
 ![image](https://github.com/user-attachments/assets/e4d3918e-edb4-4a78-9910-0803f41ee0dd)
 
+✅ Now you should be ready to start the real work!
+
+## 🚀 Project Execution Guide
+This section provides a step-by-step guide to loading the datasets, transforming the data, and performing the necessary analyses to extract meaningful insights.
 
 
 
