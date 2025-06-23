@@ -211,7 +211,7 @@ The `models` folder of the repo, holds all the SQL models we build, which define
 #### 🏗️ Create Staging Layer Models
 Staging models sit right on top of the raw data *(including source tables)*. They perform basic cleaning and normalization of source data. Raw source data is usually inconsistent or has unclear naming conventions. Staging creates a clean and reliable layer that downstream models can depend on without having to handle source inconsistencies each time.
 
-- SQL files
+- 📝 Staging SQL files
 
 In this project, our primary focus within the SQL models is to standardize and clarify column names—especially when original names lack clear context or meaning. Below is an example (`stg_orders.sql`) located in the `models/staging` folder, where we apply these naming improvements as part of the staging process. You can find all the staging .sql files [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/tree/dev/models/staging).
 
@@ -235,6 +235,7 @@ renamed AS (
 SELECT * FROM renamed
 ```
 
+- 📄 Staging YAML files
 
 
 
