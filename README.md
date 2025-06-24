@@ -36,7 +36,10 @@ The objective of this project is to leverage dbt Cloud's capabilities to ingest,
     1. [Load the Data](#-load-the-data)
         1. [Approach 1 - Utilize the sample data in the repo](#-approach-1---utilize-the-sample-data-in-the-repo)
         2. [Approach 2 - Load the data from S3](#-approach-2---load-the-data-from-s3)
-    2. [Configure the dbt_project.yml file](#-configure-the-dbt_project.yml-file)
+    2. [Configure the dbt project yaml file](#-configure-the-dbt-project-yaml-file)
+    3. [Develop Models](#-develop-models)
+        1. [Create Staging Layer Models](#-create-staging-layer-models)
+            1. [Configure the dbt project yaml file for Staging](#-configure-the-dbt-project-yaml-file-for-staging)
 
 ## 📌 Prerequisites
 - A dbt Cloud account (a 14-day free trial is available)
@@ -214,7 +217,7 @@ The same process must be applied to all six tables involved in this project. Bel
 
 ✅ With the setup complete, you are ready to proceed to the development of the models.
 
-## ⚙️ Configure the dbt_project.yml file
+## ⚙️ Configure the dbt project yaml file
 The `dbt_project.yml` file is the central configuration file in the dbt project. It works as a "control panel" for how the dbt project behaves. 
 It tells dbt:
 - Where to find the models
@@ -283,7 +286,7 @@ Staging models sit right on top of the raw data *(including source tables)*. The
 >
 > In the context of this project, only 2 layers have been created for simplicity (i.e. `staging` and `marts`).
 
-#### 🧰 Configure the dbt_project.yml file for Staging
+#### 🧰 Configure the dbt project yaml file for Staging
 
 We need to apply folder-level configuration for everything under `models/staging`. In this context, we need to define the target schema of the staging tables and the materialization type.
 
