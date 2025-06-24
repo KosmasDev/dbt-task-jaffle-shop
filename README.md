@@ -53,9 +53,9 @@ The objective of this project is to leverage dbt Cloud's capabilities to ingest,
         4. [Test and Materialize the Marts Models](#test-and-materialize-the-marts-models)
         5. [Insights](#-insights)
 8. [Analyses](#-analyses)
-    9. [Create SQL file in the Analyses folder](#-create-sql-file-in-the-analyses-folder)
-    10. [Compile the Analyses SQL file](#-compile-the-analyses-sql-file)
-    11. [Business Insights](#-business-insights)
+    1. [Create SQL file in the Analyses folder](#-create-sql-file-in-the-analyses-folder)
+    2. [Compile the Analyses SQL file](#-compile-the-analyses-sql-file)
+    3. [Business Insights](#-business-insights)
 9. [Create Custom Test](#-create-custom-test)
    
 
