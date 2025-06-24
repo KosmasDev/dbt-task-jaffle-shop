@@ -417,8 +417,17 @@ dbt run
 ✅ With the staging views created in Snowflake, you’re now ready to proceed to the `marts` layer models.
 
 ### 📊 Create Marts Layer Models
-In well-structured dbt projects, the `models` folder should be divided into logical layers. In the context of this project, only 2 layers have been created for simplicity (i.e. `staging` and `marts`).
+In dbt projects, the `marts` folder contains the analytics-ready data models. These are the final tables/views that are used for business reporting (dashboards in BI tools), ad hoc analysis, and data products consumed by stakeholders. 
 
+
+In well-structured dbt projects, the `models` folder should be divided into logical layers. In the context of this project, only 2 layers have been created for simplicity (i.e. `staging` and `marts`). Hence, the purpose of the `marts` layer is to translate raw and semi-processed data into a format that is easy to consume and aligned with business logic.
+
+In this project, the `marts` folder contains the models (`.sql` and `.yml` files) that can be utilized by the business end-users to answer the following questions:
+- Which customer has visited more locations?
+- Who is the most loyal customer per location?
+
+> [!NOTE]
+> Based on the way the third business question was phrased — ***"Has anyone ordered everything?"*** — it appears to be an **ad-hoc request**, requiring a **one-off analysis** rather than an ongoing or regularly refreshed report. Given this assumption, there is no need to create a reusable model under the `models/marts` directory. Instead, a standalone SQL file was added to the `analyses` folder to answer this specific question. More details about this file can be found in a later section.
 
 
 - Lineage of the final model (the 3rd model is not included here as I have included it under the Analyses folder) 
