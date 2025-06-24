@@ -12,9 +12,9 @@ The purpose of this README is to guide you through:
 
 By the end of this project, you'll have hands-on experience with building a modern analytics workflow using dbt Cloud.
 
-## ❓ Purpose
+## 🔍 Customer Behavior Analysis
 
-The main purpose of this project is to explore the dbt Cloud features and utilize its functionalities to load, transform, and analyse the required data to answer the following questions.
+The objective of this project is to leverage dbt Cloud's capabilities to ingest, transform, and analyze customer and order data to answer key business questions related to customer engagement and loyalty. Specifically, the analysis focuses on the following insights:
 - Which customer has visited more locations?
 - List the most loyal customer per location.
 - Has anyone ordered everything?
@@ -120,16 +120,23 @@ Set up a dbt Cloud account if you don't have one already (if you do, just create
 ## 🚀 Project Execution Guide
 This section provides a step-by-step guide to loading the datasets, transforming the raw data, and building models to extract meaningful insights.
 
-### 📥 Load the Data
+## 📥 Load the Data
 There are multiple ways to load the data for this project. Below, you’ll find the approach used in this setup, along with an alternative method you can consider.
 
 > [!IMPORTANT]
 > Seeds in dbt are static CSV files typically used to upload small reference datasets that support modeling workflows. In this project, seeds are leveraged as a convenient way to ingest sample data quickly. While this is not the primary purpose of seeds - ***since dbt is not designed as a data ingestion or loading tool*** - using seeds in this way allows us to focus on building and testing models without needing to set up a full external data pipeline. In the context of this project, we followed Approach 1.
 
-#### 🗂️ Approach 1: Utilize the sample data in the repo
+### 🗂️ Approach 1: Utilize the sample data in the repo
 - To populate the source files located in `seeds/jaffle-data` as tables in Snowflake, we first need to configure the `dbt_project.yml` file, as shown in the screenshot below. In this file, we define the project name (`dbt_task_analytics`) and specify the target schema where the seed tables will be created — in this case, `raw`. Note that the database does not need to be defined in this file, as it is configured separately within the dbt Cloud connection settings. Please find the `dbt_project.yml` file [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/blob/dev/dbt_project.yml).
-    
-![image](https://github.com/user-attachments/assets/450aff5f-d014-4aab-b8f5-543534ff5cb8)
+
+```yml
+seeds:
+  dbt_task_analytics:   # specify the project name
+    +schema: raw        # Target schema
+    jaffle-data:        # refers to the 'jaffle-data' folder
+      +enabled: "{{ var('load_source_data', false) }}"  # Conditionally enables the seed based on the 'load_source_data' variable
+                                                        # If 'load_source_data' is set to true, this seed will be loaded
+```
       
 - Next, we need to run the following dbt command to generate the seed tables. Once executed successfully, the resulting tables will appear in Snowflake as shown in the screenshot below. 
 ```sql
@@ -150,7 +157,7 @@ SELECT * FROM dbt_analytics.dbt_kstrakosia_raw.raw_stores;
 SELECT * FROM dbt_analytics.dbt_kstrakosia_raw.raw_supplies;
 ```
 
-#### 💾 Approach 2: Load the data from S3
+### 💾 Approach 2: Load the data from S3
 - Set Up the Target Schema *(Define the schema that will house the source tables)*
 ```sql
 CREATE SCHEMA dbt_analytics.dbt_kstrakosia_raw;
@@ -201,19 +208,78 @@ The same process must be applied to all six tables involved in this project. Bel
 | `raw_supplies` | `s3://dbt-tutorial-public/long_term_dataset/raw_supplies.csv` | [Download](https://dbt-tutorial-public.s3.us-west-2.amazonaws.com/long_term_dataset/raw_supplies.csv) | `(id text, name text, cost int, perishable boolean, sku text)` |
 | `raw_stores` | `s3://dbt-tutorial-public/long_term_dataset/raw_stores.csv` | [Download](https://dbt-tutorial-public.s3.us-west-2.amazonaws.com/long_term_dataset/raw_stores.csv) | `(id text, name text, opened_at datetime, tax_rate float)` |
 
-✅ With the setup complete, we’re ready to proceed to the next step.
+✅ With the setup complete, you are ready to proceed to the development of the models.
 
-### 🛠️ Develop Models
+## 🛠️ Develop Models
 The `models` folder of the repo, holds all the SQL models we build, which define transformations and shape data in our warehouse. Usually, these models are split into different layers or folders to enforce modularity, clarity, and maintainability. In the screenshot below, you can see the data flow that visualises the connections of the models that will be created. 
 
 ![Screenshot 2025-06-23 221912](https://github.com/user-attachments/assets/e093b1e5-d1ef-4202-b353-1338f4ace26b)
 
-#### 🏗️ Create Staging Layer Models
+### 🏗️ Create Staging Layer Models
 Staging models sit right on top of the raw data *(including source tables)*. They perform basic cleaning and normalization of source data. Raw source data is usually inconsistent or has unclear naming conventions. Staging creates a clean and reliable layer that downstream models can depend on without having to handle source inconsistencies each time.
 
-- 📝 Staging SQL files
+#### 🧰 Configure the dbt_project.yml file for Staging
 
-In this project, our primary focus within the staging models is to standardize and clarify column names—especially when original names lack clear context or meaning. Below is an example (`stg_orders.sql`) located in the `models/staging` folder, where we apply these naming improvements as part of the staging process. You can find all the staging .sql files [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/tree/dev/models/staging).
+We need to apply folder-level configuration for everything under `models/staging`. In this context, we need to define the target schema of the staging tables and the materialization type.
+
+Materialization is how dbt physically creates your models in the data warehouse. In staging, we mainly clean up column names, cast data types, and create some times reusable logic. Hence, it's best practice to use the view materialization for these models, because they're simple, we want them to reflect the latest source data, and we don't need to store them as physical tables. The following code snippet is related only to the staging configurations. Please find the complete `dbt_project.yml` [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/blob/dev/dbt_project.yml).
+
+```yml
+models:
+  dbt_task_analytics:           # This is the dbt "project" name
+    staging:                    # This refers to the `models/staging` folder
+      +schema: dev              # These models will be built in the "dev" schema
+      +materialized: view       # These models will be materialized as views
+```
+
+> [!IMPORTANT]
+> The dbt_project.yml is the central configuration file for the dbt project. It tells dbt:
+> - Where the models live
+> - How they should be materialized (i.e., built in the warehouse)
+> - Which schema to use
+> - Other settings like testing, documentation, seeds, macros
+> So, every time we run `dbt run`, `dbt test`, `dbt build`, etc., dbt consults this file to know what to do with the models.
+
+
+#### 🧭 Create the __sources.yml file
+
+The `__sources.yml` file in the `models/staging` folder plays a very important role in how dbt connects to and tracks the raw data in the warehouse. It is a source declaration file that is used to "show" to dbt that the data already exist in the warehouse, in order for it to refer to this data as a trusted input in the models. 
+
+This file allows dbt to:
+1. Reference existing raw tables with the source() function
+2. Track lineage from raw → staging → marts
+3. Add documentation to raw tables
+4. Enable testing and freshness checks
+
+Below you can see the content of the file
+
+```yml
+version: 2
+
+sources:
+  - name: ecom
+    schema: dbt_kstrakosia_raw
+    description: E-commerce data for the Jaffle Shop
+    tables:
+      - name: raw_customers
+        description: One record per person who has purchased one or more items
+      - name: raw_orders
+        description: One record per order (consisting of one or more order items)
+        loaded_at_field: ordered_at
+      - name: raw_items
+        description: Items included in an order
+      - name: raw_stores
+        loaded_at_field: opened_at
+      - name: raw_products
+        description: One record per SKU for items sold in stores
+      - name: raw_supplies
+        description: One record per supply per SKU of items sold in stores
+```
+
+
+#### 📝 Create staging SQL files
+
+In this project, our primary focus within the staging models is to standardize and clarify column names—especially when original names lack clear context or meaning. Below is an example (`stg_orders.sql`) located in the `models/staging` folder, where we apply these naming improvements as part of the staging process. All the staging models pull data from the source tables saved in the `raw` schema. You can find all the staging .sql files [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/tree/dev/models/staging).
 
 ```sql
 WITH 
@@ -235,11 +301,75 @@ renamed AS (
 SELECT * FROM renamed
 ```
 
-- 📄 Staging YAML files
+#### 📄 Create staging YAML files
+
+The YAML files are model metadata files in the `models/staging` folder, and they are used in dbt to:
+1. Document the models and columns by providing a human-readable description of what the model `stg_orders` represents and what each column means. Based on this YAML file the we can generate auto-docs in dbt Cloud using this metadata.
+2. Define data quality tests.
+3. Keep documentation and tests close to the logic. By putting stg_orders.yml next to stg_orders.sql, we keep everything related to that model tightly organized.
+    - The SQL contains the logic
+    - The YAML contains the metadata and validations
+
+Below you can find the content of the `stg_orders.yml`. The quality tests are one of the most important parts of the file as we have defined that:
+1. `order_id` must be not null and unique
+2. `customer_id`, `location_id`, and `order_date` must all be not null
+3. The following row-level expression must hold TRUE: `total_price - tax = pretax_price`
+    
+You can find all the staging .yml files [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/tree/dev/models/staging).
+
+```yml
+models:
+  - name: stg_orders
+    description: Order data with basic cleaning and transformation applied, one row per order.
+    data_tests:
+      - dbt_utils.expression_is_true:
+          expression: "total_price - tax = pretax_price"
+    columns:
+      - name: order_id
+        description: The unique key of the table (i.e. unique identifier for each order).
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: The unique identifier for each customer.
+        data_tests:
+          - not_null
+      - name: location_id
+        description: The unique identifier for each store location.
+        data_tests:
+          - not_null
+      - name: order_date
+        description: The date that each order was placed.
+        data_tests:
+          - not_null
+```
+
+#### 🛢️ Test and Materialize the Staging Models
+
+- First, you will need to run all the tests that have been defined in the `.yml` files. Please run the below command:
+
+```CLI
+dbt test
+```
+
+- If all the tests ran successfully, then you will need to materialize the Staging models. Please run the below command:
+
+```CLI
+dbt run
+```
+
+- Open the Snowflake UI *(or the UI of the warehouse that you are using)* and make sure that the Views have been created under the `dev` schema.
+
+![image](https://github.com/user-attachments/assets/216bd257-212b-4d58-9ef5-0e403d94875c)
+
+✅ With the staging views created in Snowflake, you’re now ready to proceed to the `marts` layer models.
+
+### 📊 Create Marts Layer Models
 
 
 
 
-
+- Lineage of the final model (the 3rd model is not included here as I have included it under the Analyses folder) 
+![image](https://github.com/user-attachments/assets/d3def913-842b-4a80-97c8-17877bc59aa9)
 
 
