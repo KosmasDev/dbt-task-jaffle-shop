@@ -39,7 +39,7 @@ The objective of this project is to leverage dbt Cloud's capabilities to ingest,
     2. [Configure the dbt project yaml file](#-configure-the-dbt-project-yaml-file)
     3. [Develop Models](#-develop-models)
         1. [Create Staging Layer Models](#-create-staging-layer-models)
-            1. [Configure the dbt project yaml file for Staging](#-configure-the-dbt-project-yaml-file-for-staging)
+            A. [Configure the dbt project yaml file for Staging](#-configure-the-dbt-project-yaml-file-for-staging)
 
 ## 📌 Prerequisites
 - A dbt Cloud account (a 14-day free trial is available)
