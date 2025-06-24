@@ -677,9 +677,9 @@ The above table contains the list of the customers who have visited a specific l
 
 ## 📈 Create SQL file in the Analyses folder
 
-As mentioned in a [previous section](#-create-marts-layer-models) the `analyses/` directory is where we store ad-hoc SQL analyses that are not part of your dbt model pipeline, but still benefit from being version-controlled, documented, and re-usable within the project context. Hence, the purpose of the `analyses/` directory is to store exploratory SQL queries using {{ ref() }} and {{ source() }} safely. and keep analytical SQL logic organized and reusable, without the need to dig through multiple SQL files.
+As mentioned in a previous section's [Notes](#-create-marts-layer-models), the `analyses/` directory is where we store ad-hoc SQL analyses that are not part of your dbt model pipeline, but still benefit from being version-controlled, documented, and re-usable within the project context. Hence, the purpose of the `analyses/` directory is to store exploratory SQL queries using {{ ref() }} and {{ source() }} safely. and keep analytical SQL logic organized and reusable, without the need to dig through multiple SQL files.
 
-In the context of this project, an SQL file was created under the `analyses/` folder to help business users determine whether any customer has ever ordered all unique products available in the store. The query below directly answers the business question: "**Has anyone ordered everything?**" by returning a simple '**YES**' or '**NO**'. If more detailed insights are needed—such as a list of customers who meet this criterion or the exact number of such customers—the query can be easily adjusted to return those results as well.
+In the context of this project, an SQL file was created under the `analyses/` folder to help business users determine whether any customer has ever ordered all the unique products available in the store. The query below directly answers the business question: "**Has anyone ordered everything?**" by returning a simple '**YES**' or '**NO**'. If more detailed insights are needed—such as a list of customers who meet this criterion or the exact number of such customers—the query can be easily adjusted to return those results as well.
 
 *file name*: `customer_ordered_everything.sql`
 ```sql
