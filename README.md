@@ -660,7 +660,7 @@ dbt run
 
 ✅ With the `marts` tables created in Snowflake, you’re now ready to analyse the outcomes of the models and get business insights.
 
-### 🔍 Business Insights
+### 🔍 Insights
 
 Since one of the main goals of this project is to gain some meaningful insights from the available data and answer [specific business questions](#-create-marts-layer-models), as the next step, we need to use the 2 tables created in the `dev` schema in Snowflake and just run s `SELECT *` command.
 
@@ -764,11 +764,30 @@ In order to get the expected business insight, we need to `copy` the compiled SQ
 
 ## 🧪 Create Custom Test
 
-In the context of a debt workflow, tests are a way to validate the data. They ensure our assumptions hold true - like checking that a primary key is unique or that a foreign key relationship is respected. There are 2 categories of Tests:
+In the context of a dbt workflow, tests are a way to validate the data. They ensure our assumptions hold true - like checking that a primary key is unique or that a foreign key relationship is respected. There are 2 categories of Tests:
 - **Generic (built-in)** tests like `unique`, `not_null`, `accepted_values`
 - **Custom (user-defined)** tests, which are SQL queries that we write, typically stored under the tests/ directory
 
-The Tests are stored 
+The custom tests are stored in the `tests/` directory as standalone `.sql` files. These are more complex or business-specific validations than the simple tests declared in schema.yml.
+
+The logic is that the sql query stored in the `tests` folder: 
+- Should return zero rows **if the test passes**
+- Returns one or more rows **if the test fails**
+
+In the context of this project, a custom test was implemented to ensure that each `order_date` occurs after the corresponding store’s `opening_date`. The SQL logic for this validation is stored in the `tests/` directory and can be reviewed below.
+
+*file name*: `test_order_date_after_store_opening.sql`
+```sql
+SELECT *
+FROM {{ ref('orders') }}
+WHERE order_date <= opening_date
+```
+
+When you run the `dbt test` command, this custom test will be included among all the validations executed. If you want to run only this specific test, please use the command below.
+
+```CLI
+dbt test --select path:tests/test_order_date_after_store_opening.sql
+```
 
 
 - Lineage of the final model (the 3rd model is not included here as I have included it under the Analyses folder) 
