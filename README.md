@@ -271,9 +271,13 @@ The `models` folder of the repo, holds all the SQL models we build, which define
 ![Screenshot 2025-06-23 221912](https://github.com/user-attachments/assets/e093b1e5-d1ef-4202-b353-1338f4ace26b)
 
 ### 🏗️ Create Staging Layer Models
-In well-structured dbt projects, the `models` folder should be divided into logical layers. In the context of this project, only 2 layers have been created for simplicity (i.e. `staging` and `marts`).
 
 Staging models sit right on top of the raw data *(including source tables)*. They perform basic cleaning and normalization of source data. Raw source data is usually inconsistent or has unclear naming conventions. Staging creates a clean and reliable layer that downstream models can depend on without having to handle source inconsistencies each time.
+
+> [!NOTE]
+> In well-structured dbt projects, the `models/` folder is organized into logical layers that reflect the stages of data transformation. This typically includes folders like `staging/`, where raw source data is cleaned and standardized; `intermediate/`, where more complex joins or business logic are applied; and `marts/`, which contains the final, business-ready models such as fact and dimension tables. Structuring models this way promotes clarity, reusability, and makes it easier for analysts/developers to debug issues and maintain a reliable analytics workflow over time.
+>
+> In the context of this project, only 2 layers have been created for simplicity (i.e. `staging` and `marts`).
 
 #### 🧰 Configure the dbt_project.yml file for Staging
 
