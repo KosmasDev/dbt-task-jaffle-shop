@@ -451,7 +451,7 @@ In this project, the `marts` folder contains the models (`.sql` and `.yml` files
 > [!NOTE]
 > Based on the way the third business question was phrased — ***"Has anyone ordered everything?"*** — it appears to be an **ad-hoc request**, requiring a **one-off analysis** rather than an ongoing or regularly refreshed report. Given this assumption, there is no need to create a reusable model under the `models/marts` directory. Instead, a standalone SQL file was added to the `analyses` folder to answer this specific question. More details about this file can be found in a later section.
 
-#### 🧰 Configure the dbt project yaml file for Marts
+### 🧰 Configure the dbt project yaml file for Marts
 
 We need to apply folder-level configuration for everything under `models/marts`. In this context, we need to define the target schema of the staging tables and the materialization type.
 - **Target Schema**: For the `models`, we use a different schema from the one used for the raw tables. We use the `dev` schema.
@@ -469,7 +469,7 @@ models:
       +materialized: table       # Sets materialization to 'table' for all models under marts/
 ```
 
-#### 📝 Create Marts SQL files
+### 📝 Create Marts SQL files
 
 The models stored under the `models/marts` directory represent the final, curated datasets that are consumed by analysts and BI tools. These models are the core output of the dbt transformation process, as they apply business logic, metrics, and aggregations to generate meaningful insights. Designed to be clean and business-friendly to allow stakeholders to make informed decisions based on analytics-ready data.
 
@@ -579,7 +579,7 @@ WHERE ranking = 1  -- Keep only top customers per location
 ```
 
 
-#### 📄 Create Marts YAML files
+### 📄 Create Marts YAML files
 
 As described in a [previous](#-create-staging-yaml-files) section, the YAML files, under the `models` folder, are model metadata files. They are used in dbt to document the models and columns by providing a human-readable description, define data quality tests, and keep documentation and logic tightly organized under the same directory.
 
@@ -635,7 +635,7 @@ models:
           - not_null
 ```
 
-#### 🛢️ Test and Materialize the Marts Models
+### 🛢️ Test and Materialize the Marts Models
 
 - First, you will need to run all the tests that have been defined in the `.yml` files. Please run the below command:
 
@@ -655,7 +655,7 @@ dbt run
 
 ✅ With the `marts` tables created in Snowflake, you’re now ready to analyse the outcomes of the models.
 
-#### 🔍 Insights
+### 🔍 Insights
 
 Since one of the main goals of this project is to gain some meaningful insights from the available data and answer [specific business questions](#-create-marts-layer-models), as the next step, we need to use the 2 tables created in the `dev` schema in Snowflake and just run s `SELECT *` command.
 
