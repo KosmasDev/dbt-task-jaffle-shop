@@ -637,6 +637,23 @@ models:
 
 #### 🛢️ Test and Materialize the Marts Models
 
+- First, you will need to run all the tests that have been defined in the `.yml` files. Please run the below command:
+
+```CLI
+dbt test
+```
+
+- If all the tests ran successfully, then you will need to materialize the Staging models. Please run the below command:
+
+```CLI
+dbt run
+```
+
+- Open the Snowflake UI *(or the UI of the warehouse that you are using)* and make sure that the Tables have been created under the `dev` schema.
+
+![image](https://github.com/user-attachments/assets/998363cd-719c-40f8-81f0-e8cbcbb09060)
+
+
 #### 🔍 Insights
 
 
