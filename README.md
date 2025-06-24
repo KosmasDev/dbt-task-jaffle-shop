@@ -271,6 +271,8 @@ The `models` folder of the repo, holds all the SQL models we build, which define
 ![Screenshot 2025-06-23 221912](https://github.com/user-attachments/assets/e093b1e5-d1ef-4202-b353-1338f4ace26b)
 
 ### 🏗️ Create Staging Layer Models
+In well-structured dbt projects, the `models` folder should be divided into logical layers. In the context of this project, only 2 layers have been created for simplicity (i.e. `staging` and `marts`).
+
 Staging models sit right on top of the raw data *(including source tables)*. They perform basic cleaning and normalization of source data. Raw source data is usually inconsistent or has unclear naming conventions. Staging creates a clean and reliable layer that downstream models can depend on without having to handle source inconsistencies each time.
 
 #### 🧰 Configure the dbt_project.yml file for Staging
@@ -286,15 +288,6 @@ models:
       +schema: dev              # These models will be built in the "dev" schema
       +materialized: view       # These models will be materialized as views
 ```
-
-> [!IMPORTANT]
-> The dbt_project.yml is the central configuration file for the dbt project. It tells dbt:
-> - Where the models live
-> - How they should be materialized (i.e., built in the warehouse)
-> - Which schema to use
-> - Other settings like testing, documentation, seeds, macros
-> So, every time we run `dbt run`, `dbt test`, `dbt build`, etc., dbt consults this file to know what to do with the models.
-
 
 #### 🧭 Create the __sources.yml file
 
@@ -420,7 +413,7 @@ dbt run
 ✅ With the staging views created in Snowflake, you’re now ready to proceed to the `marts` layer models.
 
 ### 📊 Create Marts Layer Models
-
+In well-structured dbt projects, the `models` folder should be divided into logical layers. In the context of this project, only 2 layers have been created for simplicity (i.e. `staging` and `marts`).
 
 
 
