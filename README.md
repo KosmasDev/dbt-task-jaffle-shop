@@ -210,6 +210,61 @@ The same process must be applied to all six tables involved in this project. Bel
 
 ✅ With the setup complete, you are ready to proceed to the development of the models.
 
+## ⚙️ Configure the dbt_project.yml file
+The `dbt_project.yml` file is the central configuration file in the dbt project. It works as a "control panel" for how the dbt project behaves. 
+It tells dbt:
+- Where to find the models
+- How to build them (as tables, views, etc.)
+- What naming and folder conventions to follow
+- Where to store the resulting tables in the data warehouse
+- Which version of dbt will be used
+
+It is important to configure it before starting the actual work because it ensures that we are not building your models in the wrong place, we apply consistent conventions across the project, and other team members understand the structure immediately. It is like setting up your project rules before you start writing the SQL.
+
+The following is the `dbt_project.yml` file used in this project, along with simple comments to make the configuration easier to follow.
+
+```yml
+config-version: 2 # Specifies the version of the dbt config format.
+
+name: dbt_task_analytics # The name of your dbt project.
+
+version: "1.0.0" # Our versioning for the project (useful for tracking project evolution).
+
+require-dbt-version: ">=1.5.0" # Ensures the project only runs with dbt version 1.5.0 or later to avoid compatibility issues.
+
+dbt-cloud:
+  project-id: 70471823480395 # The ID of your dbt Cloud project.
+
+profile: default             # The name of the dbt profile that tells dbt how to connect to your data warehouse.
+
+model-paths: ["models"] # Path to your model `.sql` files.
+analysis-paths: ["analyses"] # Path for `.sql` files that are meant for analysis purposes.
+test-paths: ["tests"] # Where dbt will look for custom data tests (in addition to standard schema.yml tests).
+seed-paths: ["seeds"] # Folder containing the seed CSV files.
+macro-paths: ["macros"] # Folder where the Jinja macros live.
+snapshot-paths: ["snapshots"] # Folder where snapshot `.sql` files are stored (used for slowly changing dimension tracking).
+
+target-path: "target" # Directory where dbt writes compiled SQL.
+
+clean-targets: 
+  - "target"  # These folder will be deleted when we run `dbt clean`. It removes compiled models to start fresh.
+
+seeds:
+  dbt_task_analytics:
+    +schema: raw
+    jaffle-data:
+      +enabled: "{{ var('load_source_data', false) }}"
+
+models:
+  dbt_task_analytics:
+    staging:
+      +schema: dev
+      +materialized: view
+    marts:
+      +schema: dev
+      +materialized: table
+```
+
 ## 🛠️ Develop Models
 The `models` folder of the repo, holds all the SQL models we build, which define transformations and shape data in our warehouse. Usually, these models are split into different layers or folders to enforce modularity, clarity, and maintainability. In the screenshot below, you can see the data flow that visualises the connections of the models that will be created. 
 
