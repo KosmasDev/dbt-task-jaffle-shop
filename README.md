@@ -23,7 +23,7 @@ The objective of this project is to leverage dbt Cloud's capabilities to ingest,
 > This document primarily focuses on the process of loading data and building models that can be used to generate valuable customer insights. It is **not intended as a detailed guide** for configuring the dbt-Snowflake connection or setting up a full dbt environment. Instead, it provides high-level setup instructions, along with links to official documentation for detailed guidance.
 
 ## 📘 Table of Contents
-1. [Prerequisites](#prerequisites)
+1. [Prerequisites](#-prerequisites)
 2. [Initializing your repository – Create and Fork](#initializing-your-repository--create-and-fork)
     1. [Step 1: Create a new repository](#step-1-create-a-new-repository)
     2. [Step 2: Fork the jaffle shop project](#step-2-fork-the-jaffle-shop-project)
