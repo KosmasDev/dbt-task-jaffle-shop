@@ -32,17 +32,21 @@ The objective of this project is to leverage dbt Cloud's capabilities to ingest,
     1. [Configure Snowflake for dbt Cloud](#--configure-snowflake-for-dbt-cloud)
     2. [Set up a dbt Cloud Account](#--set-up-a-dbt-cloud-account)
     3. [Create a New dbt Project](#-create-a-new-dbt-project)
-
-        [Project Execution Guide](#-project-execution-guide)
-1. [Load the Data](#-load-the-data)
+**-------------- PROJECT EXECUTION --------------**
+5. [Load the Data](#-load-the-data)
     1. [Approach 1 - Utilize the sample data in the repo](#-approach-1---utilize-the-sample-data-in-the-repo)
     2. [Approach 2 - Load the data from S3](#-approach-2---load-the-data-from-s3)
-2. [Configure the dbt project yaml file](#-configure-the-dbt-project-yaml-file)
-3. [Develop Models](#-develop-models)
+6. [Configure the dbt project yaml file](#-configure-the-dbt-project-yaml-file)
+7. [Develop Models](#-develop-models)
     1. [Create Staging Layer Models](#-create-staging-layer-models)
         2. [Configure the dbt project yaml file for Staging](#-configure-the-dbt-project-yaml-file-for-staging)
         3. 
 
+
+
+
+
+[Project Execution Guide](#-project-execution-guide)
 ## 📌 Prerequisites
 - A dbt Cloud account (a 14-day free trial is available)
 - Access to a data warehouse with the necessary permissions to:
