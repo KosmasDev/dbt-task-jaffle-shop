@@ -344,7 +344,7 @@ models:
           - not_null
 ```
 
-#### 📄 Test and Materialize the Staging Models
+#### 🛢️ Test and Materialize the Staging Models
 
 - First, you will need to run all the tests that have been defined in the `.yml` files. Please run the below command:
 
