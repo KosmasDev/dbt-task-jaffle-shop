@@ -60,6 +60,9 @@ The objective of this project is to leverage dbt Cloud's capabilities to ingest,
 10. [Create Custom Test](#-create-custom-test)
 11. [Additional dbt features](#-additional-dbt-features)
     1. [Lineage](#lineage)
+    2. [Documentation](#documentation)
+    3. [Macros](#macros)
+    4. [Orchestration](#orchestration)
 
 
    
@@ -820,11 +823,39 @@ Then, the documentation site is built (*or updated*) and can be viewed it direct
 
 ## Macros
 
+Macros in dbt are general-purpose, reusable blocks of Jinja + SQL. They can be used mainly for:
+- Creating custom tests
+- Creating custom materializations
+- Repeating logic in models
+- Building dynamic SQL
 
+As part of this project, a custom macros file was created to demonstrate how dbt allows you to build reusable logic for testing and transformations. Although standard tests were already in place for the `most_loyal_customer_per_location` model, we implemented an additional custom `not_null` test using a macro to showcase the flexibility and power of dbt's extensibility features.
 
-## Snapshots
+- **Step 1**: Create am `.sql` file under the `macros/` folder. This is a reusable macro code.
 
+file name*: `no_nulls_in_columns.sql`
+```sql
+{% macro no_nulls_in_columns(model) %}
+    SELECT * FROM {{ model }} WHERE
+    {% for col in adapter.get_columns_in_relation(model) -%}
+        {{ col.column }} IS NULL OR
+    {% endfor %}
+    FALSE
+{% endmacro %}
+```
 
+- **Step 2**: Create an `.sql` file under the `tests/` folder. This is a test targeting only the `most_loyal_customer_per_location` model.
+
+file name*: `no_nulls_in_loyal_customers.sql`
+```sql
+{{ no_nulls_in_columns(ref('most_loyal_customer_per_location')) }}
+```
+
+- **Step 3**: Run the following dbt command to run the test.
+
+```CLI
+dbt test --select most_loyal_customer_per_location
+```
 
 ## Orchestration
 
