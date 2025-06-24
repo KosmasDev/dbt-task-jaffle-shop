@@ -35,11 +35,12 @@ The objective of this project is to leverage dbt Cloud's capabilities to ingest,
 
 **---------- PROJECT EXECUTION STEPS ----------**
 
-5. [Load the Data](#-load-the-data)
+5. [Project Execution Guide](#-project-execution-guide)
+6. [Load the Data](#-load-the-data)
     1. [Approach 1 - Utilize the sample data in the repo](#-approach-1---utilize-the-sample-data-in-the-repo)
     2. [Approach 2 - Load the data from S3](#-approach-2---load-the-data-from-s3)
-6. [Configure the dbt project yaml file](#-configure-the-dbt-project-yaml-file)
-7. [Develop Models](#-develop-models)
+7. [Configure the dbt project yaml file](#-configure-the-dbt-project-yaml-file)
+8. [Develop Models](#-develop-models)
     1. [Create Staging Layer Models](#-create-staging-layer-models)
         1. [Configure the dbt project yaml file for Staging](#-configure-the-dbt-project-yaml-file-for-staging)
         2. [Create the sources yaml file](#-create-the-sources-yaml-file)
@@ -52,13 +53,13 @@ The objective of this project is to leverage dbt Cloud's capabilities to ingest,
         3. [Create Marts YAML files](#-create-marts-yaml-files)
         4. [Test and Materialize the Marts Models](#test-and-materialize-the-marts-models)
         5. [Insights](#-insights)
-8. [Analyses](#-analyses)
+9. [Analyses](#-analyses)
     1. [Create SQL file in the Analyses folder](#-create-sql-file-in-the-analyses-folder)
     2. [Compile the Analyses SQL file](#-compile-the-analyses-sql-file)
     3. [Business Insights](#-business-insights)
-9. [Create Custom Test](#-create-custom-test)
-10. [Additional dbt features](#-additional-dbt-features)
-    1. [Lineage](#-lineage)
+10. [Create Custom Test](#-create-custom-test)
+11. [Additional dbt features](#-additional-dbt-features)
+    1. [Lineage](#lineage)
 
 
    
