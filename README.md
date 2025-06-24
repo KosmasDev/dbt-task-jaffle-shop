@@ -675,6 +675,61 @@ The above table contains the list of the customers who have visited a specific l
 
 ![image](https://github.com/user-attachments/assets/6f8dace6-63b6-43e1-a5e3-74ee31de0a5b)
 
+## 📈 Create SQL file in the Analyses folder
+
+As mentioned in a [previous section](#-create-marts-layer-models) the `analyses/` directory is where we store ad-hoc SQL analyses that are not part of your dbt model pipeline, but still benefit from being version-controlled, documented, and re-usable within the project context. Hence, the purpose of the `analyses/` directory is to store exploratory SQL queries using {{ ref() }} and {{ source() }} safely. and keep analytical SQL logic organized and reusable, without the need to dig through multiple SQL files.
+
+In the context of this project, an SQL file was created under the `analyses/` folder to help business users determine whether any customer has ever ordered all unique products available in the store. The query below directly answers the business question: "**Has anyone ordered everything?**" by returning a simple '**YES**' or '**NO**'. If more detailed insights are needed—such as a list of customers who meet this criterion or the exact number of such customers—the query can be easily adjusted to return those results as well.
+
+*file name*: `customer_ordered_everything.sql`
+```sql
+-- Step 1: Get the total number of unique products in the dataset
+WITH 
+total_distinct_products AS (
+  SELECT
+    COUNT(DISTINCT(product_id))  -- Count of all distinct products ever ordered
+  FROM
+    {{ ref('stg_order_items') }}  -- Refers to the staging table of order items
+),
+
+-- Step 2: Count how many unique products each customer has ordered
+customer_orders AS (
+  SELECT
+    ord.customer_id,
+    COUNT(DISTINCT oi.product_id) AS count_product_id  -- Count of unique products per customer
+  FROM
+    {{ ref('stg_order_items') }} AS oi 
+    JOIN {{ ref('stg_orders') }} AS ord ON ord.order_id = oi.order_id
+    JOIN {{ ref('stg_customers') }} AS cust ON ord.customer_id = cust.customer_id
+  GROUP BY
+    ord.customer_id  -- Grouping by customer to calculate per-customer product count
+),
+
+-- Step 3: Filter only those customers who ordered ALL available products
+customers_order_everything AS (
+  SELECT
+    cust.customer_id,
+    cust.customer_name,
+    co.count_product_id
+  FROM
+    customer_orders AS co
+    JOIN {{ ref('stg_customers') }} AS cust ON co.customer_id = cust.customer_id
+  WHERE 
+    co.count_product_id = (SELECT * FROM total_distinct_products)  
+    -- Keeps only customers whose product count matches the total available products
+)
+
+-- Step 4: Final output: Has at least one customer ordered all products?
+SELECT 
+  CASE 
+    WHEN COUNT(*) > 0 THEN 'YES' 
+    ELSE 'NO' 
+  END AS HAS_ANYONE_ORDER_EVERYTHING  -- Outputs a single row: YES or NO
+FROM
+  customers_order_everything  -- If this table has rows, someone ordered everything
+```
+
+![image](https://github.com/user-attachments/assets/3ac6d0ff-3e35-40d1-9f80-2d34ea786497)
 
 
 
