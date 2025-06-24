@@ -41,14 +41,20 @@ The objective of this project is to leverage dbt Cloud's capabilities to ingest,
 6. [Configure the dbt project yaml file](#-configure-the-dbt-project-yaml-file)
 7. [Develop Models](#-develop-models)
     1. [Create Staging Layer Models](#-create-staging-layer-models)
-        2. [Configure the dbt project yaml file for Staging](#-configure-the-dbt-project-yaml-file-for-staging)
-        3. 
+        1. [Configure the dbt project yaml file for Staging](#-configure-the-dbt-project-yaml-file-for-staging)
+        2. [Create the sources yaml file](#-create-the-sources-yaml-file)
+        3. [Create staging SQL files](#-create-staging-sql-files)
+        4. [Create staging YAML files](#-create-staging-yaml-files)
+        5. [Test and Materialize the Staging Models](#-test-and-materialize-the-staging-models)
+    2. [Create Marts Layer Models](#-create-marts-layer-models)
+        1. [Configure the dbt project yaml file for Marts](#-configure-the-dbt-project-yaml-file-for-marts)
+        2. [Create Marts SQL files](#-create-marts-sql-files)
+        3. [Create Marts YAML files](#-create-marts-yaml-files)
+        4. [Test and Materialize the Marts Models](#-test-and-materialize-the-marts-models)
+        5. [Insights](#-insights)
+   
 
 
-
-
-
-[Project Execution Guide](#-project-execution-guide)
 ## 📌 Prerequisites
 - A dbt Cloud account (a 14-day free trial is available)
 - Access to a data warehouse with the necessary permissions to:
@@ -309,7 +315,7 @@ models:
       +materialized: view       # These models will be materialized as views
 ```
 
-#### 🧭 Create the __sources.yml file
+#### 🧭 Create the sources yaml file
 
 The `__sources.yml` file in the `models/staging` folder plays a very important role in how dbt connects to and tracks the raw data in the warehouse. It is a source declaration file that is used to "show" to dbt that the data already exist in the warehouse, in order for it to refer to this data as a trusted input in the models. 
 
@@ -445,7 +451,7 @@ In this project, the `marts` folder contains the models (`.sql` and `.yml` files
 > [!NOTE]
 > Based on the way the third business question was phrased — ***"Has anyone ordered everything?"*** — it appears to be an **ad-hoc request**, requiring a **one-off analysis** rather than an ongoing or regularly refreshed report. Given this assumption, there is no need to create a reusable model under the `models/marts` directory. Instead, a standalone SQL file was added to the `analyses` folder to answer this specific question. More details about this file can be found in a later section.
 
-#### 🧰 Configure the dbt_project.yml file for Marts
+#### 🧰 Configure the dbt project yaml file for Marts
 
 We need to apply folder-level configuration for everything under `models/marts`. In this context, we need to define the target schema of the staging tables and the materialization type.
 - **Target Schema**: For the `models`, we use a different schema from the one used for the raw tables. We use the `dev` schema.
