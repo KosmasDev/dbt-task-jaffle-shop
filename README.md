@@ -52,6 +52,11 @@ The objective of this project is to leverage dbt Cloud's capabilities to ingest,
         3. [Create Marts YAML files](#-create-marts-yaml-files)
         4. [Test and Materialize the Marts Models](#test-and-materialize-the-marts-models)
         5. [Insights](#-insights)
+8. [Analyses](#-analyses)
+    9. [Create SQL file in the Analyses folder](#-create-sql-file-in-the-analyses-folder)
+    10. [Compile the Analyses SQL file](#-compile-the-analyses-sql-file)
+    11. [Business Insights](#-business-insights)
+9. [Create Custom Test](#-create-custom-test)
    
 
 
@@ -655,7 +660,7 @@ dbt run
 
 ✅ With the `marts` tables created in Snowflake, you’re now ready to analyse the outcomes of the models and get business insights.
 
-### 🔍 Insights
+### 🔍 Business Insights
 
 Since one of the main goals of this project is to gain some meaningful insights from the available data and answer [specific business questions](#-create-marts-layer-models), as the next step, we need to use the 2 tables created in the `dev` schema in Snowflake and just run s `SELECT *` command.
 
@@ -675,11 +680,13 @@ The above table contains the list of the customers who have visited a specific l
 
 ![image](https://github.com/user-attachments/assets/6f8dace6-63b6-43e1-a5e3-74ee31de0a5b)
 
-## 📈 Create SQL file in the Analyses folder
+## 📊 Analyses
 
 As mentioned in a previous section's [Notes](#-create-marts-layer-models), the `analyses/` directory is where we store ad-hoc SQL analyses that are not part of your dbt model pipeline, but still benefit from being version-controlled, documented, and re-usable within the project context. Hence, the purpose of the `analyses/` directory is to store exploratory SQL queries using {{ ref() }} and {{ source() }} safely, and keep analytical SQL logic organized and reusable, without the need to dig through multiple SQL files.
 
-In the context of this project, an SQL file was created under the `analyses/` folder to help business users determine whether any customer has ever ordered all the unique products available in the store. The query below directly answers the business question: "**Has anyone ordered everything?**" by returning a simple '**YES**' or '**NO**'. If more detailed insights are needed—such as a list of customers who meet this criterion or the exact number of such customers—the query can be easily adjusted to return those results as well.
+## 📈 Create SQL file in the Analyses folder
+
+In the context of this project, an SQL file was created under the `analyses/` folder to help business users determine whether any customer has ever ordered all the unique products available in the store. The query below directly answers the business question: "**Has anyone ordered everything?**" by returning a simple '**YES**' or '**NO**'. If more detailed insights are needed (*such as a list of customers who meet this criterion or the exact number of such customers*) the query can be easily adjusted to return those results as well.
 
 *file name*: `customer_ordered_everything.sql`
 ```sql
@@ -744,14 +751,24 @@ dbt compile --select path:analyses/customer_ordered_everything.sql
 ```
 
 Now the files should be compiled and stored here:
+
 ![image](https://github.com/user-attachments/assets/74278b63-5ffa-41d8-b930-41f254221d3a)
+
+✅ With the SQL file created under the `analyses/` folder and the compiled files stored in the `target/compiled/<your_dbtcloud_project_name>/analyses` directory, you’re now ready to get the required business insights.
 
 ### 🔍 Business Insights
 
-In order to get the expected business insight, we need to `copy` the compiled sql file from the `target/compiled/<your_dbtcloud_project_name>/analyses` directory and run it in the Snowflake UI. Below you can find the result of the sql query.
+In order to get the expected business insight, we need to `copy` the compiled SQL file from the `target/compiled/<your_dbtcloud_project_name>/analyses` directory and run it in the Snowflake UI. Below you can find the result of the SQL query. If more detailed insights are needed (*such as a list of customers who meet this criterion or the exact number of such customers*) the query can be easily adjusted to return those results as well.
 
 ![image](https://github.com/user-attachments/assets/3ac6d0ff-3e35-40d1-9f80-2d34ea786497)
 
+## 🧪 Create Custom Test
+
+In the context of a debt workflow, tests are a way to validate the data. They ensure our assumptions hold true - like checking that a primary key is unique or that a foreign key relationship is respected. There are 2 categories of Tests:
+- **Generic (built-in)** tests like `unique`, `not_null`, `accepted_values`
+- **Custom (user-defined)** tests, which are SQL queries that we write, typically stored under the tests/ directory
+
+The Tests are stored 
 
 
 - Lineage of the final model (the 3rd model is not included here as I have included it under the Analyses folder) 
