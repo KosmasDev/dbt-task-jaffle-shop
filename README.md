@@ -283,7 +283,8 @@ Staging models sit right on top of the raw data *(including source tables)*. The
 
 We need to apply folder-level configuration for everything under `models/staging`. In this context, we need to define the target schema of the staging tables and the materialization type.
 
-Materialization is how dbt physically creates your models in the data warehouse. In staging, we mainly clean up column names, cast data types, and create some times reusable logic. Hence, it's best practice to use the view materialization for these models, because they're simple, we want them to reflect the latest source data, and we don't need to store them as physical tables. The following code snippet is related only to the staging configurations. Please find the complete `dbt_project.yml` [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/blob/dev/dbt_project.yml).
+- **Target Schema**: For the `models`, we use a different schema from the one used for the raw tables. We use the `dev` schema.
+- **Materialization** is how dbt physically creates your models in the data warehouse. In staging, we mainly clean up column names, cast data types, and create some times reusable logic. Hence, it's best practice to use the view materialization for these models, because they're simple, we want them to reflect the latest source data, and we don't need to store them as physical tables. The following code snippet is related only to the staging configurations. Please find the complete `dbt_project.yml` [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/blob/dev/dbt_project.yml).
 
 ```yml
 models:
@@ -417,7 +418,7 @@ dbt run
 ✅ With the staging views created in Snowflake, you’re now ready to proceed to the `marts` layer models.
 
 ### 📊 Create Marts Layer Models
-In dbt projects, the `marts` folder contains the analytics-ready data models. These are the final tables/views that are used for business reporting (dashboards in BI tools), ad hoc analysis, and data products consumed by stakeholders. 
+In dbt projects, the `marts` folder contains the analytics-ready data models. These are the final tables that are used for business reporting (dashboards in BI tools), ad hoc analysis, and data products consumed by stakeholders. 
 
 
 In well-structured dbt projects, the `models` folder should be divided into logical layers. In the context of this project, only 2 layers have been created for simplicity (i.e. `staging` and `marts`). Hence, the purpose of the `marts` layer is to translate raw and semi-processed data into a format that is easy to consume and aligned with business logic.
@@ -429,6 +430,23 @@ In this project, the `marts` folder contains the models (`.sql` and `.yml` files
 > [!NOTE]
 > Based on the way the third business question was phrased — ***"Has anyone ordered everything?"*** — it appears to be an **ad-hoc request**, requiring a **one-off analysis** rather than an ongoing or regularly refreshed report. Given this assumption, there is no need to create a reusable model under the `models/marts` directory. Instead, a standalone SQL file was added to the `analyses` folder to answer this specific question. More details about this file can be found in a later section.
 
+#### 🧰 Configure the dbt_project.yml file for Marts
+
+We need to apply folder-level configuration for everything under `models/marts`. In this context, we need to define the target schema of the staging tables and the materialization type.
+- **Target Schema**: For the `models`, we use a different schema from the one used for the raw tables. We use the `dev` schema.
+- **Materialization**: As mentioned in the previous section, `marts` host the final models that are used for business reporting (dashboards in BI tools), business analysis, and data products consumed by stakeholders. In this context, the `table` materialization is the most commonly used approach for these models because:
+    - These models are queried frequently by BI tools or analysts, and materializing them as tables means that the data is precomputed and stored, leading to faster query response times.
+    - Since they don’t change until the next `dbt run`, table models provide a stable dataset, which is important for consistency to avoid the risk of live changes mid-analysis *(which can happen with views)*.
+
+Below, you can find the part of `dbt_project.yml` defining the target schema and the materialization. Please find the complete `dbt_project.yml` [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/blob/dev/dbt_project.yml).
+
+```yml
+models:
+  dbt_task_analytics:            # This is the name of your dbt project or package
+    marts:                       # Folder inside models/ (i.e., models/marts)
+      +schema: dev               # Overrides default schema
+      +materialized: table       # Sets materialization to 'table' for all models under marts/
+```
 
 - Lineage of the final model (the 3rd model is not included here as I have included it under the Analyses folder) 
 ![image](https://github.com/user-attachments/assets/d3def913-842b-4a80-97c8-17877bc59aa9)
