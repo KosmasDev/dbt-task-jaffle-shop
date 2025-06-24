@@ -57,6 +57,10 @@ The objective of this project is to leverage dbt Cloud's capabilities to ingest,
     2. [Compile the Analyses SQL file](#-compile-the-analyses-sql-file)
     3. [Business Insights](#-business-insights)
 9. [Create Custom Test](#-create-custom-test)
+10. [Additional dbt features](#-additional-dbt-features)
+    1. [Lineage](#-lineage)
+
+
    
 
 
@@ -789,8 +793,14 @@ When you run the `dbt test` command, this custom test will be included among all
 dbt test --select path:tests/test_order_date_after_store_opening.sql
 ```
 
+# ✨ Additional dbt features
 
-- Lineage of the final model (the 3rd model is not included here as I have included it under the Analyses folder) 
+## Lineage
+
+Lineage refers to the visual representation of the relationships and dependencies between the dbt models and sources. It is a map showing how the data moves and transforms through the dbt project - from raw source tables all the way to the final models used by analysts and BI tools.
+
+Below, you can find the simple lineage that was auto-created in dby cloud for this project.
+
 ![image](https://github.com/user-attachments/assets/d3def913-842b-4a80-97c8-17877bc59aa9)
 
 
