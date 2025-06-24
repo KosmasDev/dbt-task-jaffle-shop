@@ -332,7 +332,7 @@ sources:
 
 #### 📝 Create staging SQL files
 
-In this project, our primary focus within the staging models is to standardize and clarify column names—especially when original names lack clear context or meaning. Below is an example (`stg_orders.sql`) located in the `models/staging` folder, where we apply these naming improvements as part of the staging process. All the staging models pull data from the source tables saved in the `raw` schema. You can find all the staging .sql files [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/tree/dev/models/staging).
+In this project, our primary focus for the `staging` models is to standardize and clarify column names (*especially when original names lack clear context or meaning*). Below is an example (`stg_orders.sql`) located in the `models/staging` folder, where we apply these naming improvements as part of the staging process. All the staging models pull data from the source tables saved in the `raw` schema. You can find all the staging .sql files [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/tree/dev/models/staging).
 
 ```sql
 WITH 
@@ -448,9 +448,11 @@ models:
       +materialized: table       # Sets materialization to 'table' for all models under marts/
 ```
 
-#### 📝 Create staging SQL files
+#### 📝 Create Marts SQL files
 
+The models stored under the `models/marts` directory represent the final, curated datasets that are consumed by analysts and BI tools. These models are the core output of the dbt transformation process, as they apply business logic, metrics, and aggregations to generate meaningful insights. Designed to be clean and business-friendly to allow stakeholders to make informed decisions based on analytics-ready data.
 
+In this project, 2 models have been created to answer the 2 business questions included in the [Create Marts Layer Models](#create-marts-layer-models) section.
 
 
 
