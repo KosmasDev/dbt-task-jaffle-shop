@@ -24,7 +24,7 @@ The objective of this project is to leverage dbt Cloud's capabilities to ingest,
 
 ## 📘 Table of Contents
 1. [Prerequisites](#-prerequisites)
-2. [Initializing your repository – Create and Fork](#initializing-your-repository--create-and-fork)
+2. [Initializing your repository – Create and Fork](#-initializing-your-repository--create-and-fork)
     1. [Step 1: Create a new repository](#step-1-create-a-new-repository)
     2. [Step 2: Fork the jaffle shop project](#step-2-fork-the-jaffle-shop-project)
 3. [Clean up the repository](#clean-up-the-repository)
