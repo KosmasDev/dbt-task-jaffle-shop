@@ -36,7 +36,7 @@ The objective of this project is to leverage dbt Cloud's capabilities to ingest,
     1. [Load the Data](#-load-the-data)
         1. [Approach 1 - Utilize the sample data in the repo](#-approach-1---utilize-the-sample-data-in-the-repo)
         2. [Approach 2 - Load the data from S3](#-approach-2---load-the-data-from-s3)
-
+    2. [Configure the dbt_project.yml file](#-configure-the-dbt_project.yml-file)
 
 ## 📌 Prerequisites
 - A dbt Cloud account (a 14-day free trial is available)
