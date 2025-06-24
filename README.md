@@ -456,7 +456,7 @@ In this project, 2 models have been created to answer the 2 business questions i
 
 1. **Model 1** - Which customer has visited more locations?
 
-file name: `customer_visited_most_locations.sql`
+*file name*: `customer_visited_most_locations.sql`
 ```sql
 -- Step 1: Join three staging tables to enrich order data with customer and location details
 WITH 
@@ -504,7 +504,7 @@ WHERE ranking = 1  -- Filters only the customer(s) with the highest number of lo
 
 2. **Model 2** - Who is the most loyal customer per location?
 
-file name: `most_loyal_customer_per_location.sql`
+*file name*: `most_loyal_customer_per_location.sql`
 ```sql
 -- Step 1: Join orders, customers, and locations into a single enriched dataset
 WITH 
@@ -559,6 +559,60 @@ WHERE ranking = 1  -- Keep only top customers per location
 
 
 #### 📄 Create Marts YAML files
+
+As described in a [previous](#-create-staging-yaml-files) section, the YAML files, under the `models` folder, are model metadata files. They are used in dbt to document the models and columns by providing a human-readable description, define data quality tests, and keep documentation and logic tightly organized under the same directory.
+
+Below you can find the 2 `.yml` files created for the 2 above [models](#-create-marts-sql-files) stored in the `models/marts` folder. Please, use them as a guide and adjust them to your models.
+
+1. **Model 1** - Which customer has visited more locations?
+
+*file name*: `customer_visited_most_locations.yml`
+```yml
+models:
+  - name: customer_visited_most_locations
+    description: List of customers that have visited the most locations.
+    columns:
+      - name: customer_id
+        description: The unique key for each customer.
+        tests:
+          - not_null
+          - unique
+      - name: customer_name
+        description: The full name of each customer.
+        tests:
+          - not_null
+      - name: count_of_locations_visited
+        description: The number of distinct locations that the customer has visited.
+        tests:
+          - not_null
+```
+
+2. **Model 2** - Who is the most loyal customer per location?
+
+*file name*: `ost_loyal_customer_per_location.yml`
+```yml
+models:
+  - name: most_loyal_customer_per_location
+    description: List of top customers per store location based on the number of visits..
+    columns:
+      - name: customer_id
+        description: The unique key for each customer.
+        tests:
+          - not_null
+          - unique
+      - name: customer_name
+        description: The full name of each customer.
+        tests:
+          - not_null
+      - name: location_name
+        description: The name of the store location.
+        tests:
+          - not_null
+      - name: store_visits
+        description: The number of times that the customer has visited the store.
+        tests:
+          - not_null
+```
 
 #### 🛢️ Test and Materialize the Marts Models
 
