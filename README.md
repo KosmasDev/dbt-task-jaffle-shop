@@ -32,6 +32,7 @@ The objective of this project is to leverage dbt Cloud's capabilities to ingest,
     1. [Configure Snowflake for dbt Cloud](#--configure-snowflake-for-dbt-cloud)
     2. [Set up a dbt Cloud Account](#--set-up-a-dbt-cloud-account)
     3. [Create a New dbt Project](#-create-a-new-dbt-project)
+
 **-------------- PROJECT EXECUTION --------------**
 5. [Load the Data](#-load-the-data)
     1. [Approach 1 - Utilize the sample data in the repo](#-approach-1---utilize-the-sample-data-in-the-repo)
