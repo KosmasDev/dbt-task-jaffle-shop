@@ -452,7 +452,7 @@ models:
 
 The models stored under the `models/marts` directory represent the final, curated datasets that are consumed by analysts and BI tools. These models are the core output of the dbt transformation process, as they apply business logic, metrics, and aggregations to generate meaningful insights. Designed to be clean and business-friendly to allow stakeholders to make informed decisions based on analytics-ready data.
 
-In this project, 2 models have been created to answer the 2 business questions included in the [Create Marts Layer Models](#create-marts-layer-models) section.
+In this project, 2 models have been created to answer the 2 business questions included in the [Create Marts Layer Models](#-create-marts-layer-models) section.
 
 
 
