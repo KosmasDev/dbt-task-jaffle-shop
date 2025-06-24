@@ -637,7 +637,7 @@ models:
 
 ### 🛢️ Test and Materialize the Marts Models
 
-- First, you will need to run all the tests that have been defined in the `.yml` files. Please run the below command:
+- First, you will need to run all the tests that have been defined in the `.yml` files. Please run the following command:
 
 ```CLI
 dbt test
@@ -653,7 +653,7 @@ dbt run
 
 ![image](https://github.com/user-attachments/assets/998363cd-719c-40f8-81f0-e8cbcbb09060)
 
-✅ With the `marts` tables created in Snowflake, you’re now ready to analyse the outcomes of the models.
+✅ With the `marts` tables created in Snowflake, you’re now ready to analyse the outcomes of the models and get business insights.
 
 ### 🔍 Insights
 
@@ -677,7 +677,7 @@ The above table contains the list of the customers who have visited a specific l
 
 ## 📈 Create SQL file in the Analyses folder
 
-As mentioned in a previous section's [Notes](#-create-marts-layer-models), the `analyses/` directory is where we store ad-hoc SQL analyses that are not part of your dbt model pipeline, but still benefit from being version-controlled, documented, and re-usable within the project context. Hence, the purpose of the `analyses/` directory is to store exploratory SQL queries using {{ ref() }} and {{ source() }} safely. and keep analytical SQL logic organized and reusable, without the need to dig through multiple SQL files.
+As mentioned in a previous section's [Notes](#-create-marts-layer-models), the `analyses/` directory is where we store ad-hoc SQL analyses that are not part of your dbt model pipeline, but still benefit from being version-controlled, documented, and re-usable within the project context. Hence, the purpose of the `analyses/` directory is to store exploratory SQL queries using {{ ref() }} and {{ source() }} safely, and keep analytical SQL logic organized and reusable, without the need to dig through multiple SQL files.
 
 In the context of this project, an SQL file was created under the `analyses/` folder to help business users determine whether any customer has ever ordered all the unique products available in the store. The query below directly answers the business question: "**Has anyone ordered everything?**" by returning a simple '**YES**' or '**NO**'. If more detailed insights are needed—such as a list of customers who meet this criterion or the exact number of such customers—the query can be easily adjusted to return those results as well.
 
@@ -728,6 +728,27 @@ SELECT
 FROM
   customers_order_everything  -- If this table has rows, someone ordered everything
 ```
+
+### 🛢️ Compile the Analyses SQL file
+
+In contrast to the sql files stored under the `models/` directory (*which get materialized when running the `dbt run` command*), the files stored in the `analyses/` folder do not get materialized in the warehouse, but they just get compiled and stored under the `target/compiled/<your_dbtcloud_project_name>/analyses` directory. Hence, after generating the sql file in the `analyses/` folder, we need to run the following command to compile it and be able to use it in the Snowflake UI. 
+
+```CLI
+dbt compile
+```
+
+The above command compiles all the files. If you want to specify the file to be compiled, then you can run the following command.
+
+```CLI
+dbt compile --select path:analyses/customer_ordered_everything.sql
+```
+
+Now the files should be compiled and stored here:
+![image](https://github.com/user-attachments/assets/74278b63-5ffa-41d8-b930-41f254221d3a)
+
+### 🔍 Business Insights
+
+In order to get the expected business insight, we need to `copy` the compiled sql file from the `target/compiled/<your_dbtcloud_project_name>/analyses` directory and run it in the Snowflake UI. Below you can find the result of the sql query.
 
 ![image](https://github.com/user-attachments/assets/3ac6d0ff-3e35-40d1-9f80-2d34ea786497)
 
