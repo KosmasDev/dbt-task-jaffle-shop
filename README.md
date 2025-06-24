@@ -653,8 +653,28 @@ dbt run
 
 ![image](https://github.com/user-attachments/assets/998363cd-719c-40f8-81f0-e8cbcbb09060)
 
+✅ With the `marts` tables created in Snowflake, you’re now ready to analyse the outcomes of the models.
 
 #### 🔍 Insights
+
+Since one of the main goals of this project is to gain some meaningful insights from the available data and answer [specific business questions](#-create-marts-layer-models), as the next step, we need to use the 2 tables created in the `dev` schema in Snowflake and just run s `SELECT *` command.
+
+- Which customer has visited more locations?
+```sql
+SELECT * FROM DBT_ANALYTICS.DBT_KSTRAKOSIA_DEV.CUSTOMER_VISITED_MOST_LOCATIONS;
+```
+The above table contains a list of the customers ranked by count of unique locations that they have visited. In this case, no customer has visited more than 1 store, and subsequently we have a tie between multiple customers. Please find the results below. 
+
+![image](https://github.com/user-attachments/assets/c810abe6-5b97-4f24-8830-9730782fe3d5)
+
+- Who is the most loyal customer per location?
+```sql
+SELECT * FROM DBT_ANALYTICS.DBT_KSTRAKOSIA_DEV.MOST_LOYAL_CUSTOMER_PER_LOCATION;
+```
+The above table contains the list of the customers who have visited a specific location the most times *(***i.e.*** loyal customers)*. In this case, there is no tie between the customers. Please find the results below. 
+
+![image](https://github.com/user-attachments/assets/6f8dace6-63b6-43e1-a5e3-74ee31de0a5b)
+
 
 
 
