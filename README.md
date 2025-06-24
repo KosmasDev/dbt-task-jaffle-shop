@@ -50,7 +50,7 @@ The objective of this project is to leverage dbt Cloud's capabilities to ingest,
         1. [Configure the dbt project yaml file for Marts](#-configure-the-dbt-project-yaml-file-for-marts)
         2. [Create Marts SQL files](#-create-marts-sql-files)
         3. [Create Marts YAML files](#-create-marts-yaml-files)
-        4. [Test and Materialize the Marts Models](#-test-and-materialize-the-marts-models)
+        4. [Test and Materialize the Marts Models](#test-and-materialize-the-marts-models)
         5. [Insights](#-insights)
    
 
