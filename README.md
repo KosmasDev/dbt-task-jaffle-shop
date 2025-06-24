@@ -208,7 +208,7 @@ The same process must be applied to all six tables involved in this project. Bel
 | `raw_supplies` | `s3://dbt-tutorial-public/long_term_dataset/raw_supplies.csv` | [Download](https://dbt-tutorial-public.s3.us-west-2.amazonaws.com/long_term_dataset/raw_supplies.csv) | `(id text, name text, cost int, perishable boolean, sku text)` |
 | `raw_stores` | `s3://dbt-tutorial-public/long_term_dataset/raw_stores.csv` | [Download](https://dbt-tutorial-public.s3.us-west-2.amazonaws.com/long_term_dataset/raw_stores.csv) | `(id text, name text, opened_at datetime, tax_rate float)` |
 
-✅ With the setup complete, we’re ready to proceed to the next step.
+✅ With the setup complete, you are ready to proceed to the development of the models.
 
 ## 🛠️ Develop Models
 The `models` folder of the repo, holds all the SQL models we build, which define transformations and shape data in our warehouse. Usually, these models are split into different layers or folders to enforce modularity, clarity, and maintainability. In the screenshot below, you can see the data flow that visualises the connections of the models that will be created. 
@@ -343,6 +343,26 @@ models:
         data_tests:
           - not_null
 ```
+
+#### 📄 Test and Materialize the Staging Models
+
+- First, you will need to run all the tests that have been defined in the `.yml` files. Please run the below command:
+
+```CLI
+dbt test
+```
+
+- If all the tests ran successfully, then you will need to materialize the Staging models. Please run the below command:
+
+```CLI
+dbt run
+```
+
+- Open the Snowflake UI *(or the UI of the warehouse that you are using)* and make sure that the Views have been created under the `dev` schema.
+
+![image](https://github.com/user-attachments/assets/216bd257-212b-4d58-9ef5-0e403d94875c)
+
+✅ With the staging views created in Snowflake, you’re now ready to proceed to the `marts` layer models.
 
 ### 📊 Create Marts Layer Models
 
