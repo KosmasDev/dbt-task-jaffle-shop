@@ -423,7 +423,7 @@ In dbt projects, the `marts` folder contains the analytics-ready data models. Th
 
 In well-structured dbt projects, the `models` folder should be divided into logical layers. In the context of this project, only 2 layers have been created for simplicity (i.e. `staging` and `marts`). Hence, the purpose of the `marts` layer is to translate raw and semi-processed data into a format that is easy to consume and aligned with business logic.
 
-In this project, the `marts` folder contains the models (`.sql` and `.yml` files) that can be utilized by the business end-users to answer the following questions:
+In this project, the `marts` folder contains the models (`.sql` and `.yml` files) that can be utilized by the business end-users to answer the following **business questions**:
 - Which customer has visited more locations?
 - Who is the most loyal customer per location?
 
@@ -454,8 +454,115 @@ The models stored under the `models/marts` directory represent the final, curate
 
 In this project, 2 models have been created to answer the 2 business questions included in the [Create Marts Layer Models](#-create-marts-layer-models) section.
 
+1. **Model 1** - Which customer has visited more locations?
+
+file name: `customer_visited_most_locations.sql`
+```sql
+-- Step 1: Join three staging tables to enrich order data with customer and location details
+WITH 
+joined_tables AS (
+    SELECT 
+        ord.order_id,
+        ord.order_date,
+        ord.customer_id,
+        cust.customer_name,
+        ord.location_id,
+        loc.location_name,
+        loc.opening_date
+    FROM {{ ref('stg_orders') }} AS ord  -- Reference to the staging orders model
+    LEFT JOIN {{ ref('stg_customers') }} AS cust ON ord.customer_id = cust.customer_id  -- Enrich orders with customer info
+    LEFT JOIN {{ ref('stg_locations') }} AS loc ON ord.location_id = loc.location_id    -- Enrich orders with location info
+),
+
+-- Step 2: Count how many *distinct* locations each customer has visited
+customer_different_locations AS (
+    SELECT 
+        customer_id,
+        customer_name, 
+        COUNT(DISTINCT(location_id)) AS count_of_locations_visited 
+    FROM joined_tables
+    GROUP BY customer_id, customer_name
+),
+
+-- Step 3: Rank customers by the number of locations visited (descending order)
+customers_ranked AS (
+    SELECT 
+        *, 
+        RANK() OVER (ORDER BY count_of_locations_visited DESC) AS ranking
+    FROM customer_different_locations
+)
+
+-- Step 4: Return the top-ranked customer(s) who have visited the most locations
+SELECT 
+    customer_id, 
+    customer_name, 
+    count_of_locations_visited
+FROM customers_ranked
+WHERE ranking = 1  -- Filters only the customer(s) with the highest number of locations visited
+```
 
 
+2. **Model 2** - Who is the most loyal customer per location?
+
+file name: `most_loyal_customer_per_location.sql`
+```sql
+-- Step 1: Join orders, customers, and locations into a single enriched dataset
+WITH 
+joined_tables AS (
+    SELECT 
+        ord.order_id,
+        ord.order_date,
+        ord.customer_id,
+        cust.customer_name,
+        ord.location_id,
+        loc.location_name,
+        loc.opening_date
+    FROM {{ ref('stg_orders') }} AS ord  -- Pull in orders data from staging
+    LEFT JOIN {{ ref('stg_customers') }} AS cust ON ord.customer_id = cust.customer_id  -- Add customer details
+    LEFT JOIN {{ ref('stg_locations') }} AS loc ON ord.location_id = loc.location_id    -- Add location details
+),
+
+-- Step 2: Count how many times each customer visited each location
+loyal_customers AS (
+    SELECT
+        customer_id,  
+        customer_name, 
+        location_id, 
+        location_name,
+        COUNT(*) AS store_visits  -- Number of visits to the same store by the same customer
+    FROM
+        joined_tables
+    GROUP BY customer_id, customer_name, location_id, location_name
+    ORDER BY COUNT(*) DESC  -- (Optional) Just to preview the highest counts first
+),
+
+-- Step 3: Rank customers per location based on visit count
+loyal_customers_ranked AS (
+    SELECT
+        *,
+        RANK() OVER (
+            PARTITION BY location_id 
+            ORDER BY store_visits DESC
+        ) AS ranking  -- Ranking within each location (1 = most visits)
+    FROM loyal_customers
+)
+
+-- Step 4: Return only the most loyal customer (rank 1) per location
+SELECT 
+    customer_id, 
+    customer_name,
+    location_name,
+    store_visits 
+FROM loyal_customers_ranked
+WHERE ranking = 1  -- Keep only top customers per location
+```
+
+
+#### 📄 Create Marts YAML files
+
+#### 🛢️ Test and Materialize the Marts Models
+
+#### 🔍 Insights
 
 
 
