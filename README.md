@@ -861,3 +861,10 @@ Orchestration in dbt Cloud is a key building block. While we did not cover this 
 Orchestration in dbt Cloud allows users to automate the execution of dbt models, tests, and other tasks through jobs that can be scheduled or triggered by events. Jobs are configurable workflows that define what commands to run (e.g., `dbt run`, `dbt test`), on which environment (*linked to a specific data warehouse and Git branch*), and when to run them (*via cron schedules, manual triggers, webhooks, or Git-based actions*).
 
 dbt Cloud supports both scheduled orchestration (*time-based using cron*) and event-driven orchestration (*via API, Git actions, or webhooks*), as well as CI jobs for validating changes during development. This orchestration framework simplifies pipeline automation and ensures consistent deployment of dbt projects across environments.
+
+## Hooks 
+
+Hooks in dbt are pieces of SQL that you can execute before or after a model runs, or during different stages of the dbt lifecycle (like `on-run-start`, `on-run-end`). They’re super handy for managing warehouse behavior, like setting session variables, running logging tables, or even managing permissions. You can define hooks inside `dbt_project.yml` or as part of your model configurations. For more information about dbt Snapshots, check the [official documentation](https://docs.getdbt.com/docs/build/snapshots).
+
+
+
