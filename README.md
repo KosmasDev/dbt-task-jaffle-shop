@@ -69,7 +69,7 @@ The objective of this project is to leverage dbt Cloud's capabilities to ingest,
 
 
 ## 📌 Prerequisites
-- A dbt Cloud account (a 14-day free trial is [available](https://www.getdbt.com/signup?utm_medium=paid-search&utm_source=google&utm_campaign=q3-2024_emea-brand_cv&utm_content=cloud-account_kw-dbt-ex___&utm_term=all_emea__&cq_cmp=20420610937&utm_medium=paid-search&utm_source=google&utm_campaign=q2-2024_us-brand_cv&utm_content=cloud-account_kw-dbt-ph___&utm_term=all_na_us&gad_source=1&gad_campaignid=20420610937&gbraid=0AAAAABONxYgbae5xt9S4yB934ZECPUYmV&gclid=CjwKCAjwvO7CBhAqEiwA9q2YJXDLomZc7s9uF6xZZXwTMvRnJ8W2r_y3nYWa8KMs2WOuETX1mCUhVhoCimkQAvD_BwE))
+- A dbt Cloud account (a 14-day [free trial](https://www.getdbt.com/signup?utm_medium=paid-search&utm_source=google&utm_campaign=q3-2024_emea-brand_cv&utm_content=cloud-account_kw-dbt-ex___&utm_term=all_emea__&cq_cmp=20420610937&utm_medium=paid-search&utm_source=google&utm_campaign=q2-2024_us-brand_cv&utm_content=cloud-account_kw-dbt-ph___&utm_term=all_na_us&gad_source=1&gad_campaignid=20420610937&gbraid=0AAAAABONxYgbae5xt9S4yB934ZECPUYmV&gclid=CjwKCAjwvO7CBhAqEiwA9q2YJXDLomZc7s9uF6xZZXwTMvRnJ8W2r_y3nYWa8KMs2WOuETX1mCUhVhoCimkQAvD_BwE) is available)
 - Access to a data warehouse with the necessary permissions to:
     - Create a new database for this project
     - Execute SQL queries and run dbt models
