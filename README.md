@@ -90,7 +90,7 @@ The objective of this project is to leverage dbt Cloud's capabilities to ingest,
 3. Click the "Fork" button (top-right corner of the page).
 4. Select your newly created repo (dbt-task-jaffle-shop) as the destination.
 
-## 🗑️ Clean up the Repository
+## 🧹 Clean up the Repository
 Only the following items from this repository are required:
 - The files located in the seeds/jaffle-data folder
 - The dbt_project.yml file
