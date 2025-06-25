@@ -689,7 +689,7 @@ The above table contains the list of the customers who have visited a specific l
 
 As mentioned in a previous section's [Notes](#-create-marts-layer-models), the `analyses/` directory is where we store ad-hoc SQL analyses that are not part of your dbt model pipeline, but still benefit from being version-controlled, documented, and re-usable within the project context. Hence, the purpose of the `analyses/` directory is to store exploratory SQL queries using {{ ref() }} and {{ source() }} safely, and keep analytical SQL logic organized and reusable, without the need to dig through multiple SQL files.
 
-## 📈 Create SQL file in the Analyses folder
+### ⚫ Create SQL file in the Analyses folder
 
 In the context of this project, an SQL file was created under the `analyses/` folder to help business users determine whether any customer has ever ordered all the unique products available in the store. The query below directly answers the business question: "**Has anyone ordered everything?**" by returning a simple '**YES**' or '**NO**'. If more detailed insights are needed (*such as a list of customers who meet this criterion or the exact number of such customers*) the query can be easily adjusted to return those results as well.
 
@@ -741,7 +741,7 @@ FROM
   customers_order_everything  -- If this table has rows, someone ordered everything
 ```
 
-### 🛢️ Compile the Analyses SQL file
+### ⚫ Compile the Analyses SQL file
 
 In contrast to the sql files stored under the `models/` directory (*which get materialized when running the `dbt run` command*), the files stored in the `analyses/` folder do not get materialized in the warehouse, but they just get compiled and stored under the `target/compiled/<your_dbtcloud_project_name>/analyses` directory. Hence, after generating the sql file in the `analyses/` folder, we need to run the following command to compile it and be able to use it in the Snowflake UI. 
 
@@ -761,7 +761,7 @@ Now the files should be compiled and stored here:
 
 ✅ With the SQL file created under the `analyses/` folder and the compiled files stored in the `target/compiled/<your_dbtcloud_project_name>/analyses` directory, you’re now ready to get the required business insights.
 
-### 🔍 Business Insights
+### ⚫ Business Insights
 
 In order to get the expected business insight, we need to `copy` the compiled SQL file from the `target/compiled/<your_dbtcloud_project_name>/analyses` directory and run it in the Snowflake UI. Below you can find the result of the SQL query. If more detailed insights are needed (*such as a list of customers who meet this criterion or the exact number of such customers*) the query can be easily adjusted to return those results as well.
 
