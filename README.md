@@ -40,11 +40,11 @@ The objective of this project is to leverage dbt Cloud's capabilities to ingest,
 8. [Configure the dbt project yaml file](#-configure-the-dbt-project-yaml-file)
 9. [Develop Models](#-develop-models)
     1. [Create Staging Layer Models](#-create-staging-layer-models)
-        1. [Configure the dbt project yaml file for Staging](#-configure-the-dbt-project-yaml-file-for-staging)
-        2. [Create the sources yaml file](#-create-the-sources-yaml-file)
-        3. [Create staging SQL files](#-create-staging-sql-files)
-        4. [Create staging YAML files](#-create-staging-yaml-files)
-        5. [Test and Materialize the Staging Models](#-test-and-materialize-the-staging-models)
+        1. [Configure the dbt project yaml file for Staging](#configure-the-dbt-project-yaml-file-for-staging)
+        2. [Create the sources yaml file](#create-the-sources-yaml-file)
+        3. [Create staging SQL files](#create-staging-sql-files)
+        4. [Create staging YAML files](#create-staging-yaml-files)
+        5. [Test and Materialize the Staging Models](#test-and-materialize-the-staging-models)
     2. [Create Marts Layer Models](#-create-marts-layer-models)
         1. [Configure the dbt project yaml file for Marts](#-configure-the-dbt-project-yaml-file-for-marts)
         2. [Create Marts SQL files](#-create-marts-sql-files)
@@ -310,7 +310,7 @@ Staging models sit right on top of the raw data *(including source tables)*. The
 >
 > In the context of this project, only 2 layers have been created for simplicity (i.e. `staging` and `marts`).
 
-#### 🧰 Configure the dbt project yaml file for Staging
+### Configure the dbt project yaml file for Staging
 
 We need to apply folder-level configuration for everything under `models/staging`. In this context, we need to define the target schema of the staging tables and the materialization type.
 
@@ -325,7 +325,7 @@ models:
       +materialized: view       # These models will be materialized as views
 ```
 
-#### 🧭 Create the sources yaml file
+### Create the sources yaml file
 
 The `__sources.yml` file in the `models/staging` folder plays a very important role in how dbt connects to and tracks the raw data in the warehouse. It is a source declaration file that is used to "show" to dbt that the data already exist in the warehouse, in order for it to refer to this data as a trusted input in the models. 
 
@@ -361,7 +361,7 @@ sources:
 ```
 
 
-#### 📝 Create staging SQL files
+### Create staging SQL files
 
 In this project, our primary focus for the `staging` models is to standardize and clarify column names (*especially when original names lack clear context or meaning*). Below is an example (`stg_orders.sql`) located in the `models/staging` folder, where we apply these naming improvements as part of the staging process. All the staging models pull data from the source tables saved in the `raw` schema. You can find all the staging .sql files [here ](https://github.com/KosmasDev/dbt-task-jaffle-shop/tree/dev/models/staging).
 
@@ -385,7 +385,7 @@ renamed AS (
 SELECT * FROM renamed
 ```
 
-#### 📄 Create staging YAML files
+### Create staging YAML files
 
 The YAML files are model metadata files in the `models/staging` folder, and they are used in dbt to:
 1. Document the models and columns by providing a human-readable description of what the model `stg_orders` represents and what each column means. Based on this YAML file the we can generate auto-docs in dbt Cloud using this metadata.
@@ -428,7 +428,7 @@ models:
           - not_null
 ```
 
-#### 🛢️ Test and Materialize the Staging Models
+### Test and Materialize the Staging Models
 
 - First, you will need to run all the tests that have been defined in the `.yml` files. Please run the below command:
 
