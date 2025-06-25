@@ -103,7 +103,7 @@ Please feel free to delete the remaining files, as they are not needed for this 
 ## 🚧 Setup and Configuration
 In this section, you’ll set up all the foundational components required to run the project in dbt Cloud - including configuring Snowflake, creating a dbt Cloud account, and initializing a new dbt project.
 
-### ❄️ Configure Snowflake for dbt Cloud
+### Configure Snowflake for dbt Cloud
 1. Connect to your Snowflake Account.
 2. Ensure you have selected the `ACCOUNTADMIN` role to be able to create new roles and grant privileges.
 3. Create a logical database in your data warehouse for this project. The database name used in this project is `dbt_analytics`. In this project, both the source tables and the model-generated tables/views are stored in the same database: dbt_analytics.  
