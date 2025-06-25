@@ -300,7 +300,10 @@ models:
 ```
 
 ## 🛠️ Develop Models
-The `models` folder of the repo, holds all the SQL models we build, which define transformations and shape data in our warehouse. Usually, these models are split into different layers or folders to enforce modularity, clarity, and maintainability. In the screenshot below, you can see the data flow that visualises the connections of the models that will be created. 
+
+In dbt, models are SQL files that define transformations on the raw data, and they represent intermediate or final tables or views in the data warehouse. Each model is essentially a `SELECT` statement that transforms data from source tables into a more refined, analytics-ready format. dbt compiles these models into executable SQL and runs them in dependency order. Models are the core of any dbt project because they contain the business logic, make data pipelines reusable, and enable clear documentation and testing. In a well-structured dbt project, models are split into different layers or folders to enforce modularity, clarity, and maintainability. 
+
+In the screenshot below, you can see the data flow that visualises the connections of the models that we expect to have at the end of this project. 
 
 ![image](https://github.com/user-attachments/assets/7bc00cd5-404e-459d-8b03-8a9f17be31c3)
 
