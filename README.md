@@ -299,7 +299,7 @@ In dbt, models are SQL files that define transformations on the raw data, and th
 
 In the screenshot below, you can see the data flow that visualises the connections of the models that we expect to have at the end of this project. 
 
-![image](https://github.com/user-attachments/assets/7bc00cd5-404e-459d-8b03-8a9f17be31c3)
+![image](https://github.com/user-attachments/assets/0e01bbca-3156-4791-b724-9a47a3a06fb8)
 
 ### ➕ Create Staging Layer Models
 
