@@ -1,0 +1,1 @@
+{{ no_nulls_in_columns(ref('most_loyal_customer_per_location')) }}
