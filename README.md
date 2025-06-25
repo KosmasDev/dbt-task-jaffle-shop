@@ -61,9 +61,11 @@ The objective of this project is to leverage dbt Cloud's capabilities to ingest,
     2. [Documentation](#documentation)
     3. [Macros](#macros)
     4. [Orchestration](#orchestration)
-
-
-   
+    5. [Hooks](#hooks)
+    6. [Exposures](#exposures)
+    7. [Snapshots](#snapshots)
+    8. [Working with Jinja Variables](#working-with-jinja-variables)
+    9. [Debugging with Logging](#debugging-with-logging)
 
 
 ## 📌 Prerequisites
@@ -795,6 +797,8 @@ dbt test --select path:tests/test_order_date_after_store_opening.sql
 ```
 
 # ✨ Additional dbt features
+
+This section highlights a few core dbt concepts that were not directly used in this project but are important for any dbt practitioner to understand. While this documentation doesn't aim to replicate the official dbt documentation, it offers concise definitions and context for several foundational features. These topics (*such as snapshots, hooks, exposures, and macros*) are essential to building robust and maintainable data pipelines with dbt.
 
 ## Lineage
 
