@@ -28,19 +28,18 @@ The objective of this project is to leverage dbt Cloud's capabilities to ingest,
     1. [Step 1: Create a new repository](#step-1-create-a-new-repository)
     2. [Step 2: Fork the jaffle shop project](#step-2-fork-the-jaffle-shop-project)
 3. [Clean up the repository](#-clean-up-the-repository)
-4. [Setup and Configuration](#-setup-and-configuration)
-    1. [Configure Snowflake for dbt Cloud](#-configure-snowflake-for-dbt-cloud)
-    2. [Set up a dbt Cloud Account](#-set-up-a-dbt-cloud-account)
-    3. [Create a New dbt Project](#-create-a-new-dbt-project)
+4. [Configure Snowflake for dbt Cloud](#-configure-snowflake-for-dbt-cloud)
+5. [Set up a dbt Cloud Account](#-set-up-a-dbt-cloud-account)
+6. [Create a New dbt Project](#-create-a-new-dbt-project)
 
 **---------- PROJECT EXECUTION STEPS ----------**
 
-5. [Project Execution Guide](#-project-execution-guide)
-6. [Load the Data](#-load-the-data)
+7. [Project Execution Guide](#-project-execution-guide)
+8. [Load the Data](#-load-the-data)
     1. [Approach 1 - Utilize the sample data in the repo](#-approach-1---utilize-the-sample-data-in-the-repo)
     2. [Approach 2 - Load the data from S3](#-approach-2---load-the-data-from-s3)
-7. [Configure the dbt project yaml file](#-configure-the-dbt-project-yaml-file)
-8. [Develop Models](#-develop-models)
+9. [Configure the dbt project yaml file](#-configure-the-dbt-project-yaml-file)
+10. [Develop Models](#-develop-models)
     1. [Create Staging Layer Models](#-create-staging-layer-models)
         1. [Configure the dbt project yaml file for Staging](#-configure-the-dbt-project-yaml-file-for-staging)
         2. [Create the sources yaml file](#-create-the-sources-yaml-file)
@@ -53,12 +52,12 @@ The objective of this project is to leverage dbt Cloud's capabilities to ingest,
         3. [Create Marts YAML files](#-create-marts-yaml-files)
         4. [Test and Materialize the Marts Models](#test-and-materialize-the-marts-models)
         5. [Insights](#-insights)
-9. [Analyses](#-analyses)
+11. [Analyses](#-analyses)
     1. [Create SQL file in the Analyses folder](#-create-sql-file-in-the-analyses-folder)
     2. [Compile the Analyses SQL file](#-compile-the-analyses-sql-file)
     3. [Business Insights](#-business-insights)
-10. [Create Custom Test](#-create-custom-test)
-11. [Additional dbt features](#-additional-dbt-features)
+12. [Create Custom Test](#-create-custom-test)
+13. [Additional dbt features](#-additional-dbt-features)
     1. [Lineage](#lineage)
     2. [Documentation](#documentation)
     3. [Macros](#macros)
@@ -100,10 +99,7 @@ Please feel free to delete the remaining files, as they are not needed for this 
 > [!IMPORTANT]
 > Before removing any files, ensure that each existing folder contains a placeholder file named .gitkeep. This will allow you to clean up unnecessary files while still preserving the folder structure in version control.
 
-## 🚧 Setup and Configuration
-In this section, you’ll set up all the foundational components required to run the project in dbt Cloud - including configuring Snowflake, creating a dbt Cloud account, and initializing a new dbt project.
-
-### 🟨 Configure Snowflake for dbt Cloud
+## 🟨 Configure Snowflake for dbt Cloud
 1. Connect to your Snowflake Account.
 2. Ensure you have selected the `ACCOUNTADMIN` role to be able to create new roles and grant privileges.
 3. Create a logical database in your data warehouse for this project. The database name used in this project is `dbt_analytics`. In this project, both the source tables and the model-generated tables/views are stored in the same database: dbt_analytics.  
@@ -135,10 +131,10 @@ GRANT create schema ON DATABASE dbt_analytics TO ROLE analyser;
 > GRANT SELECT ON all tables IN SCHEMA source_db.raw TO ROLE analyser;
 > ```
 
-### 🟨 Set up a dbt Cloud Account
+## 🟨 Set up a dbt Cloud Account
 Set up a dbt Cloud account if you don't have one already (if you do, just create a new project) and follow Step 4 in the [dbt-snowflake connection guide ](https://docs.getdbt.com/guides/snowflake/), to connect Snowflake to dbt Cloud. Make sure the user you configure for your connections has [adequate database permissions ](https://docs.getdbt.com/reference/database-permissions/about-database-permissions) to run dbt in the `dbt_analytics` database.
 
-### 🟨 Create a New dbt Project
+## 🟨 Create a New dbt Project
 1. Name your project — Choose a meaningful name to identify your dbt project.
 2. Configure your data warehouse — Select Snowflake as the warehouse and provide the required connection details:
    - Account
