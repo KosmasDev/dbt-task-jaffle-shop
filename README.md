@@ -29,7 +29,7 @@ The objective of this project is to leverage dbt Cloud's capabilities to ingest,
     2. [Step 2: Fork the jaffle shop project](#step-2-fork-the-jaffle-shop-project)
 3. [Clean up the repository](#-clean-up-the-repository)
 4. [Setup and Configuration](#-setup-and-configuration)
-    1. [Configure Snowflake for dbt Cloud](#configure-snowflake-for-dbt-cloud)
+    1. [Configure Snowflake for dbt Cloud](#---configure-snowflake-for-dbt-cloud)
     2. [Set up a dbt Cloud Account](#set-up-a-dbt-cloud-account)
     3. [Create a New dbt Project](#-create-a-new-dbt-project)
 
