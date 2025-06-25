@@ -491,7 +491,7 @@ In this project, 2 models have been created to answer the 2 business questions i
 
 *file name*: `customer_visited_most_locations.sql`
 ```sql
--- Step 1: Join three staging tables to enrich order data with customer and location details
+-- Join orders with customer and location data
 WITH 
 joined_tables AS (
     SELECT 
@@ -502,12 +502,12 @@ joined_tables AS (
         ord.location_id,
         loc.location_name,
         loc.opening_date
-    FROM {{ ref('stg_orders') }} AS ord  -- Reference to the staging orders model
-    LEFT JOIN {{ ref('stg_customers') }} AS cust ON ord.customer_id = cust.customer_id  -- Enrich orders with customer info
-    LEFT JOIN {{ ref('stg_locations') }} AS loc ON ord.location_id = loc.location_id    -- Enrich orders with location info
+    FROM {{ ref('stg_orders') }} AS ord
+    LEFT JOIN {{ ref('stg_customers') }} AS cust ON ord.customer_id = cust.customer_id
+    LEFT JOIN {{ ref('stg_locations') }} AS loc ON ord.location_id = loc.location_id
 ),
 
--- Step 2: Count how many *distinct* locations each customer has visited
+-- Count how many different locations each customer has visited
 customer_different_locations AS (
     SELECT 
         customer_id,
@@ -517,7 +517,7 @@ customer_different_locations AS (
     GROUP BY customer_id, customer_name
 ),
 
--- Step 3: Rank customers by the number of locations visited (descending order)
+-- Rank customers based on the number of different locations they visited
 customers_ranked AS (
     SELECT 
         *, 
@@ -525,7 +525,7 @@ customers_ranked AS (
     FROM customer_different_locations
 )
 
--- Step 4: Return the top-ranked customer(s) who have visited the most locations
+-- Return the customer(s) who visited the most locations
 SELECT 
     customer_id, 
     customer_name, 
@@ -539,7 +539,7 @@ WHERE ranking = 1  -- Filters only the customer(s) with the highest number of lo
 
 *file name*: `most_loyal_customer_per_location.sql`
 ```sql
--- Step 1: Join orders, customers, and locations into a single enriched dataset
+-- Join order, customer, and location data into a single unified table
 WITH 
 joined_tables AS (
     SELECT 
@@ -550,37 +550,34 @@ joined_tables AS (
         ord.location_id,
         loc.location_name,
         loc.opening_date
-    FROM {{ ref('stg_orders') }} AS ord  -- Pull in orders data from staging
-    LEFT JOIN {{ ref('stg_customers') }} AS cust ON ord.customer_id = cust.customer_id  -- Add customer details
-    LEFT JOIN {{ ref('stg_locations') }} AS loc ON ord.location_id = loc.location_id    -- Add location details
+    FROM {{ ref('stg_orders') }} AS ord
+    LEFT JOIN {{ ref('stg_customers') }} AS cust ON ord.customer_id = cust.customer_id
+    LEFT JOIN {{ ref('stg_locations') }} AS loc ON ord.location_id = loc.location_id
 ),
 
--- Step 2: Count how many times each customer visited each location
+-- Count how many times each customer visited each store (location)
 loyal_customers AS (
     SELECT
         customer_id,  
         customer_name, 
         location_id, 
         location_name,
-        COUNT(*) AS store_visits  -- Number of visits to the same store by the same customer
+        COUNT(*) AS store_visits
     FROM
         joined_tables
     GROUP BY customer_id, customer_name, location_id, location_name
-    ORDER BY COUNT(*) DESC  -- (Optional) Just to preview the highest counts first
+    ORDER BY COUNT(*) DESC 
 ),
 
--- Step 3: Rank customers per location based on visit count
+-- Rank customers per location based on how frequently they visited
 loyal_customers_ranked AS (
     SELECT
         *,
-        RANK() OVER (
-            PARTITION BY location_id 
-            ORDER BY store_visits DESC
-        ) AS ranking  -- Ranking within each location (1 = most visits)
+        RANK() OVER (PARTITION BY location_id ORDER BY store_visits DESC) AS ranking
     FROM loyal_customers
 )
 
--- Step 4: Return only the most loyal customer (rank 1) per location
+-- Return the most loyal customer(s) per store (rank = 1)
 SELECT 
     customer_id, 
     customer_name,
