@@ -238,7 +238,7 @@ The same process must be applied to all six tables involved in this project. Bel
 
 ✅ With the setup complete, you are ready to proceed to the development of the models.
 
-## ⚙️ Configure the dbt project yaml file
+## 🔧 Configure the dbt project yaml file
 The `dbt_project.yml` file is the central configuration file in the dbt project. It works as a "control panel" for how the dbt project behaves. 
 It tells dbt:
 - Where to find the models
@@ -293,7 +293,7 @@ models:
       +materialized: table
 ```
 
-## 🛠️ Develop Models
+## 👨‍💻 Develop Models
 
 In dbt, models are SQL files that define transformations on the raw data, and they represent intermediate or final tables or views in the data warehouse. Each model is essentially a `SELECT` statement that transforms data from source tables into a more refined, analytics-ready format. dbt compiles these models into executable SQL and runs them in dependency order. Models are the core of any dbt project because they contain the business logic, make data pipelines reusable, and enable clear documentation and testing. In a well-structured dbt project, models are split into different layers or folders to enforce modularity, clarity, and maintainability. 
 
@@ -301,7 +301,7 @@ In the screenshot below, you can see the data flow that visualises the connectio
 
 ![image](https://github.com/user-attachments/assets/7bc00cd5-404e-459d-8b03-8a9f17be31c3)
 
-### 🏗️ Create Staging Layer Models
+### ➕ Create Staging Layer Models
 
 Staging models sit right on top of the raw data *(including source tables)*. They perform basic cleaning and normalization of source data. Raw source data is usually inconsistent or has unclear naming conventions. Staging creates a clean and reliable layer that downstream models can depend on without having to handle source inconsistencies each time.
 
