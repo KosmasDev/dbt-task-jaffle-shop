@@ -1,5 +1,5 @@
+-- Join orders with customer and location data
 WITH 
-
 joined_tables AS (
     SELECT 
         ord.order_id,
@@ -14,6 +14,7 @@ joined_tables AS (
     LEFT JOIN {{ ref('stg_locations') }} AS loc ON ord.location_id = loc.location_id
 ),
 
+-- Count how many different locations each customer has visited
 customer_different_locations AS (
     SELECT 
         customer_id,
@@ -23,6 +24,7 @@ customer_different_locations AS (
     GROUP BY customer_id, customer_name
 ),
 
+-- Rank customers based on the number of different locations they visited
 customers_ranked AS (
     SELECT 
         *, 
@@ -30,6 +32,7 @@ customers_ranked AS (
     FROM customer_different_locations
 )
 
+-- Return the customer(s) who visited the most locations
 SELECT 
     customer_id, 
     customer_name, 
