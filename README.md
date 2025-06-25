@@ -29,7 +29,7 @@ The objective of this project is to leverage dbt Cloud's capabilities to ingest,
     2. [Step 2: Fork the jaffle shop project](#step-2-fork-the-jaffle-shop-project)
 3. [Clean up the repository](#-clean-up-the-repository)
 4. [Setup and Configuration](#-setup-and-configuration)
-    1. [Configure Snowflake for dbt Cloud](#configure-snowflake-for-dbt-cloud)
+    1. [Configure Snowflake for dbt Cloud](#-configure-snowflake-for-dbt-cloud)
     2. [Set up a dbt Cloud Account](#set-up-a-dbt-cloud-account)
     3. [Create a New dbt Project](#-create-a-new-dbt-project)
 
@@ -103,7 +103,7 @@ Please feel free to delete the remaining files, as they are not needed for this 
 ## 🚧 Setup and Configuration
 In this section, you’ll set up all the foundational components required to run the project in dbt Cloud - including configuring Snowflake, creating a dbt Cloud account, and initializing a new dbt project.
 
-### Configure Snowflake for dbt Cloud
+### ❄️ Configure Snowflake for dbt Cloud
 1. Connect to your Snowflake Account.
 2. Ensure you have selected the `ACCOUNTADMIN` role to be able to create new roles and grant privileges.
 3. Create a logical database in your data warehouse for this project. The database name used in this project is `dbt_analytics`. In this project, both the source tables and the model-generated tables/views are stored in the same database: dbt_analytics.  
