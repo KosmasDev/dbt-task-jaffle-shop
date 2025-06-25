@@ -302,7 +302,7 @@ models:
 ## 🛠️ Develop Models
 The `models` folder of the repo, holds all the SQL models we build, which define transformations and shape data in our warehouse. Usually, these models are split into different layers or folders to enforce modularity, clarity, and maintainability. In the screenshot below, you can see the data flow that visualises the connections of the models that will be created. 
 
-![Screenshot 2025-06-23 221912](https://github.com/user-attachments/assets/e093b1e5-d1ef-4202-b353-1338f4ace26b)
+![image](https://github.com/user-attachments/assets/7bc00cd5-404e-459d-8b03-8a9f17be31c3)
 
 ### 🏗️ Create Staging Layer Models
 
