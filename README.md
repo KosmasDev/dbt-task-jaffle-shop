@@ -686,7 +686,7 @@ The above table contains the list of the customers who have visited a specific l
 
 ## 📊 Analyses
 
-As mentioned in a previous section's [Notes](#-create-marts-layer-models), the `analyses/` directory is where we store ad-hoc SQL analyses that are not part of your dbt model pipeline, but still benefit from being version-controlled, documented, and re-usable within the project context. Hence, the purpose of the `analyses/` directory is to store exploratory SQL queries using {{ ref() }} and {{ source() }} safely, and keep analytical SQL logic organized and reusable, without the need to dig through multiple SQL files.
+As mentioned in a previous section's [Notes](#-create-marts-layer-models), based on the way the third business question was phrased — "Has anyone ordered everything?" — it appears to be an ad-hoc request, requiring a one-off analysis rather than an ongoing or regularly refreshed report. Given this assumption, there is no need to create a reusable model under the `models/marts/` directory. Instead, a standalone SQL file needs to be added to the `analyses` folder to answer this specific question. The `analyses/` directory is where we store ad-hoc SQL analyses that are not part of your dbt model pipeline, but still benefit from being version-controlled, documented, and re-usable within the project context. Hence, the purpose of the `analyses/` directory is to store exploratory SQL queries using {{ ref() }} and {{ source() }} safely, and keep analytical SQL logic organized and reusable, without the need to dig through multiple SQL files.
 
 ### 🟠 Create SQL file in the Analyses folder
 
