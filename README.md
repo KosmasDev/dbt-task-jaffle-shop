@@ -148,7 +148,6 @@ Set up a dbt Cloud account if you don't have one already (if you do, just create
 ✅ Now you should be ready to start the real work!
 
 # 🚀 Project Execution Guide
-This section provides a step-by-step guide to loading the datasets, transforming the raw data, and building models to extract meaningful insights.
 
 ## 📥 Load the Data
 There are multiple ways to load the data for this project. Below, you’ll find the approach used in this setup, along with an alternative method you can consider.
